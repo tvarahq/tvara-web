@@ -4,16 +4,19 @@ import CTA from './components/CTA'
 import Features from './components/Features'
 import Footer from './components/Footer'
 import HeroSection from './components/HeroSection'
+import { ThemeProvider } from './context/ThemeContext'
 
 function App() {
 
   return (
     <>
-      <HeroSection/>
-      <About/>
-      <Features/>
-      <CTA/>
-      <Footer/>
+      <ThemeProvider>
+        <HeroSection />
+      </ThemeProvider>
+      <About />
+      <Features />
+      <CTA />
+      <Footer />
     </>
   )
 }
