@@ -1,13 +1,24 @@
 import React from 'react'
 import ThemeToggle from './ThemeToggle'
-export default function Navbar() {  
+import TvaraLogoBlack from "../assets/tvara_logo_black.png"
+import TvaraLogoWhite from "../assets/tvara_logo_white.png"
+
+export default function Navbar() {
     return (
         <div className='w-[90%] mx-auto rounded-full overflow-hidden'>
             <nav className=" flex bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-purple-600/10 p-2 items-center justify-between">
                 <div className="max-w-screen-xl flex flex-wrap gap-20 ">
-                    <a href="https://flowbite.com/" className="flex items-center space-x-3 rtl:space-x-reverse">
-                        <img src="https://flowbite.com/docs/images/logo.svg" className="h-8" alt="Flowbite Logo" />
-                        <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                    <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
+                        <img
+                            src={TvaraLogoBlack}
+                            className="h-8 ml-3 block dark:hidden"
+                            alt="Tvara Logo Dark"
+                        />
+                        <img
+                            src={TvaraLogoWhite}
+                            className="h-8 ml-3 hidden dark:block"
+                            alt="Tvara Logo Light"
+                        />
                     </a>
 
                     <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-cta">
