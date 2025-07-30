@@ -47,7 +47,7 @@ function HeroSection() {
     <div className="">
       <div className="pt-7 ">
         <Navbar className="flex items-center justify-center" />
-        <div className="mt-10">
+        <div className="mt-30">
           <div className="container relative z-10 mx-auto px-4">
             <div className="text-center max-w-4xl mx-auto">
               <div className="">
