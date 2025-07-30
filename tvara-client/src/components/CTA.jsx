@@ -40,14 +40,11 @@ function CTA() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section className="py-20">
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Ready to Transform Your{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-              Workflows?
-            </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-blue-700 mb-6">
+            Ready to Transform Your Workflows?
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Join thousands of teams already building the future with AI-powered automation.

@@ -2,13 +2,13 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="bg-gray-900 text-white py-16">
-      <div className="container mx-auto px-4">
+    <footer className="text-white py-16 flex justify-center bg-[#060716]">
+      <div className="container mx-auto px-4 w-[80%]">
         <div className="grid md:grid-cols-2 gap-8 mb-8 items-center">
           {/* Brand */}
           <div className="space-y-4">
             <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Tvara Studios
+              Tvara
             </h3>
             <p className="text-gray-400 leading-relaxed">
               Building the future of AI workflows for everyone. From no-code
@@ -32,7 +32,7 @@ function Footer() {
 
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">
-            © 2025 Tvara Studios. All rights reserved.
+            © 2025 Tvara. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a

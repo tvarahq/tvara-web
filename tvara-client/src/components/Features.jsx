@@ -62,7 +62,7 @@ function Features() {
   };
 
   return (
-    <section className="flex justify-center mt-10 relative">
+    <section className="flex justify-center mt-20 relative">
       <div className="container mx-auto px-4 flex flex-col items-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
           {features.map((feature, index) => (

@@ -1,5 +1,6 @@
 import './App.css'
-import About from './components/AboutSection'
+import AboutSection from './components/AboutSection'
+import AboutTvara from './components/AboutTvara'
 import CTA from './components/CTA'
 import Features from './components/Features'
 import Footer from './components/Footer'
@@ -11,11 +12,12 @@ function App() {
 
   return (
     <ThemeProvider>
-      <div className="bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+      <div className="bg-gray-200 dark:bg-black text-black dark:text-white transition-colors duration-300">
         <div className="bg-gradient-to-br from-blue-600/10 via-purple-600/10 to-transparent ">
           <HeroSection />
+          <AboutTvara />
           <Features />
-          <About />
+          <AboutSection />
           <CTA />
           <Footer />
         </div>
