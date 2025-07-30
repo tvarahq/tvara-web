@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ThemeToggle from './ThemeToggle'
 import TvaraLogoBlack from "../assets/tvara_logo_black.png"
 import TvaraLogoWhite from "../assets/tvara_logo_white.png"
+import GithubStar from './GithubStar';
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
@@ -63,9 +64,9 @@ export default function Navbar() {
                         </ul>
                     </div>
                 </div>
-                <div className="flex gap-3 md:order-2 items-center space-x-3 md:space-x-0 rtl:space-x-reverse">
+                <div className="flex gap-3 md:order-2 items-center justify-end space-x-3 md:space-x-0 rtl:space-x-reverse">
+                    <GithubStar />
                     <ThemeToggle />
-                    <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2  text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Get started</button>
                 </div>
             </nav>
         </div>

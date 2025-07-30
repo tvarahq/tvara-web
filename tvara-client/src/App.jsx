@@ -1,5 +1,5 @@
 import './App.css'
-import About from './components/AboutSection'
+import AboutSection from './components/AboutSection'
 import AboutTvara from './components/AboutTvara'
 import CTA from './components/CTA'
 import Features from './components/Features'
@@ -17,7 +17,7 @@ function App() {
           <HeroSection />
           <AboutTvara />
           <Features />
-          <About />
+          <AboutSection />
           <CTA />
           <Footer />
         </div>
