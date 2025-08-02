@@ -74,7 +74,7 @@ function HeroSection() {
                 </div>
               </div>
 
-              <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-gray-300 mb-6">
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-gray-300 mb-6">
                 Build AI Agentic Workflows
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#4384c1] to-blue-600">
                   Faster — No Code or Code
