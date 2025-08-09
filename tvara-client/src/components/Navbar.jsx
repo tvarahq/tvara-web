@@ -3,11 +3,12 @@ import { HiMenu, HiX } from 'react-icons/hi'
 import ThemeToggle from './ThemeToggle'
 import Tvara from "../assets/tvara_logo.png"
 import GithubStar from './GithubStar';
+import { FaSlack } from 'react-icons/fa';
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const menuRef = useRef(null); // Ref for dropdown
+    const menuRef = useRef(null);
 
     // Scroll listener
     useEffect(() => {
@@ -73,6 +74,18 @@ export default function Navbar() {
                     {/* Desktop Right Side */}
                     <div className="hidden md:flex gap-3 items-center">
                         <GithubStar />
+                        <a
+                            href="https://join.slack.com/t/tvara-workspace/shared_invite/zt-3b23aa3uu-dlcGm5pk~bg8_aF6loz3og"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-3 py-1.5 rounded-lg 
+                                    bg-[#4A154B] text-white hover:bg-[#611f69] 
+                                    transition-colors shadow-sm"
+                        >
+                            <FaSlack size={18} />
+                            <span className="hidden sm:inline">Join Slack</span>
+                        </a>
+
                         <ThemeToggle />
                     </div>
 
@@ -111,8 +124,19 @@ export default function Navbar() {
                             {item}
                         </a>
                     ))}
-                    <div className="p-4">
+                    <div className="p-4 flex flex-col gap-3">
                         <GithubStar />
+                        <a
+                            href="https://join.slack.com/t/tvara-workspace/shared_invite/zt-3b23aa3uu-dlcGm5pk~bg8_aF6loz3og"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center gap-2 px-4 py-2 rounded-lg 
+                                    bg-[#4A154B] text-white hover:bg-[#611f69] 
+                                    transition-colors shadow-sm"
+                        >
+                            <FaSlack size={18} />
+                            Join Slack
+                        </a>
                     </div>
                 </div>
             </div>
