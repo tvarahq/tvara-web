@@ -25,31 +25,49 @@ export default function Workflow() {
         },
     ];
 
-    // Track scroll progress
     const { scrollYProgress } = useScroll();
-
-    // Smooth animation for the line fill
     const scaleY = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
-
-    // Interpolate the color from gray to violet based on scroll progress
-    const lineColor = useTransform(scrollYProgress, [0, 1], ["#D1D5DB", "#8B5CF6"]); // Gray to Violet
+    const lineColor = useTransform(scrollYProgress, [0, 1], ["#D1D5DB", "#8B5CF6"]);
 
     return (
-        <div className="relative flex flex-col items-center min-h-screen dark:text-gray-300 text-gray-800 py-16">
-            <h1 className="text-4xl font-bold mb-16 text-blue-600">How It Works</h1>
-            <div className="relative flex w-full max-w-5xl translate-x-10">
-                {/* Timeline Line */}
+        <div className="relative flex flex-col items-center min-h-screen dark:text-gray-300 text-gray-800 py-8 sm:py-16 px-4">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 sm:mb-16 text-blue-600 text-center">
+                How It Works
+            </h1>
+            
+            {/* Mobile Layout - Vertical Cards */}
+            <div className="block md:hidden w-full max-w-md">
+                {timelineData.map((item, index) => (
+                    <motion.div
+                        key={index}
+                        className="relative mb-8 p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-gray-200 dark:border-gray-700"
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: index * 0.2 }}
+                    >
+                        <div className="flex items-center mb-4">
+                            <div className="w-8 h-8 bg-violet-600 rounded-full flex items-center justify-center text-white text-sm font-bold mr-4">
+                                {index + 1}
+                            </div>
+                            <h2 className="text-lg font-semibold text-blue-600">{item.time}</h2>
+                        </div>
+                        <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-400">{item.description}</p>
+                    </motion.div>
+                ))}
+            </div>
+
+            {/* Desktop Layout - Timeline */}
+            <div className="hidden md:flex relative w-full max-w-5xl translate-x-10">
                 <div className="relative w-1 bg-gray-800 dark:bg-gray-300">
-                    {/* Line that fills with color as you scroll */}
                     <motion.div
                         className="absolute top-0 left-0 w-1 origin-top"
                         style={{
                             scaleY,
-                            backgroundColor: lineColor, // Dynamically change the color
+                            backgroundColor: lineColor,
                         }}
                     ></motion.div>
 
-                    {/* Dots */}
                     {timelineData.map((_, index) => (
                         <motion.div
                             key={index}
@@ -65,7 +83,6 @@ export default function Workflow() {
                     ))}
                 </div>
 
-                {/* Timeline Content */}
                 <div className="flex flex-col w-full pl-16">
                     {timelineData.map((item, index) => (
                         <motion.div

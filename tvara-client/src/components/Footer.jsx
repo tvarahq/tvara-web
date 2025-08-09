@@ -2,46 +2,47 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer className="text-white py-16 flex justify-center bg-[#060716]">
-      <div className="container mx-auto px-4 w-[80%]">
-        <div className="grid md:grid-cols-2 gap-8 mb-8 items-center">
+    <footer className="text-white py-12 sm:py-16 flex justify-center bg-[#060716]">
+      <div className="container mx-auto px-4 w-[90%] sm:w-[80%]">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-8 items-center">
           {/* Brand */}
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+          <div className="space-y-3 sm:space-y-4 text-center md:text-left">
+            <h3 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
               Tvara
             </h3>
-            <p className="text-gray-400 leading-relaxed">
+            <p className="text-gray-400 leading-relaxed text-sm sm:text-base">
               Building the future of AI workflows for everyone. From no-code
               solutions to developer tools.
             </p>
           </div>
 
           {/* Links */}
-          <div className="flex flex-col md:flex-row md:justify-end space-y-2 md:space-y-0 md:space-x-6">
-            <a href="#" className="hover:text-white transition-colors text-gray-400 text-lg">
+          <div className="flex flex-col items-center md:items-end space-y-2 md:space-y-0 md:flex-row md:justify-end md:space-x-4 lg:space-x-6">
+            <a href="#" className="hover:text-white transition-colors text-gray-400 text-sm sm:text-base lg:text-lg py-1">
               Contact
             </a>
-            <a href="#" className="hover:text-white transition-colors text-gray-400 text-lg">
+            <a href="#" className="hover:text-white transition-colors text-gray-400 text-sm sm:text-base lg:text-lg py-1">
               Privacy Policy
             </a>
-            <a href="#" className="hover:text-white transition-colors text-gray-400 text-lg">
+            <a href="#" className="hover:text-white transition-colors text-gray-400 text-sm sm:text-base lg:text-lg py-1">
               Terms of Service
             </a>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+        <div className="border-t border-gray-800 pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <p className="text-gray-400 text-xs sm:text-sm text-center md:text-left">
             © 2025 Tvara. All rights reserved.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="flex space-x-4 sm:space-x-6">
             <a
               href="#"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-gray-400 hover:text-white transition-colors p-1"
             >
               <svg
-                width="20"
-                height="20"
+                width="18"
+                height="18"
+                className="sm:w-5 sm:h-5"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
@@ -50,11 +51,12 @@ function Footer() {
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-gray-400 hover:text-white transition-colors p-1"
             >
               <svg
-                width="20"
-                height="20"
+                width="18"
+                height="18"
+                className="sm:w-5 sm:h-5"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
@@ -63,11 +65,12 @@ function Footer() {
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-gray-400 hover:text-white transition-colors p-1"
             >
               <svg
-                width="20"
-                height="20"
+                width="18"
+                height="18"
+                className="sm:w-5 sm:h-5"
                 viewBox="0 0 24 24"
                 fill="currentColor"
               >
