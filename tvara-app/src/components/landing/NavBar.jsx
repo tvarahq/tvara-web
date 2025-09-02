@@ -6,7 +6,7 @@ import github from "../../assets/github.svg";
 
 function NavBar() {
   return (
-    <nav className="w-[90%] h-16 bg-[#222020]/[0.51] flex items-center justify-between text-white rounded-[20px] px-9 py-2.5 font-sans sticky top-8">
+    <nav className="fixed top-8 left-1/2 transform -translate-x-1/2 w-[90%] h-16 bg-[#222020]/80 backdrop-blur-sm flex items-center justify-between text-white rounded-[20px] px-9 py-2.5 font-sans z-50">
       <Link to="/">
         <img src={navbar_logo} alt="Logo" className="h-8 cursor-pointer" />
       </Link>
