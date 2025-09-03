@@ -8,13 +8,11 @@ function Landing() {
   return (
     <div className="w-full bg-background text-white px-4 md:px-24 lg:px-34">
       <GridLayout className="z-0" />
-      <div className="relative z-10">
-        <div className="relative w-full z-50">
-          <NavBar />
-        </div>
-        <HeroSection />
-        <Explore />
+      <div className="relative">
+        <NavBar />
       </div>
+      <HeroSection />
+      <Explore />
     </div>
   );
 }
