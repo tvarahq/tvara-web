@@ -7,7 +7,7 @@ function HeroSection() {
     <div className="min-h-screen flex items-center md:items-end pb-8 md:pb-12 z-10 px-4 md:px-0">
       <div className="w-full">
         <div className="max-w-4xl">
-          <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          <h1 className="text-4xl sm:text-4xl md:text-6xl font-bold leading-tight">
             Build AI Workflows <br />
             That Work While You Sleep
           </h1>
