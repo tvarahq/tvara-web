@@ -6,6 +6,7 @@
 @theme {
   --color-primary: #39D0E8;
   --color-background: #000000;
+  --color-navbar: #222020;
 
   --font-sans: 'Roboto', ui-sans-serif, system-ui;
 }
@@ -35,4 +36,40 @@
   border-top-color: var(--color-primary);
   border-radius: 50%;
   animation: spin-border 2.5s linear infinite;
+}
+
+/* Custom Scrollbar Styles - Global */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 3px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #6b7280;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #374151 transparent;
+  scroll-behavior: smooth;
 }

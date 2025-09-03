@@ -15,7 +15,7 @@ function NavBar() {
     <>
       {/* Main Navigation */}
       <nav className="fixed top-4 md:top-8 left-1/2 transform -translate-x-1/2 w-[90%] md:w-[82%] flex items-center justify-between text-white rounded-[20px] px-4 md:px-9 py-3 font-sans z-50">
-        <div className="absolute opacity-60 inset-0 bg-[#222020] backdrop-blur-sm rounded-[20px] border-[1px] border-[#5e5656]/30"></div>
+        <div className="absolute opacity-60 inset-0 bg-navbar backdrop-blur-sm rounded-[20px]"></div>
         
         <div className="relative z-10 w-full flex items-center justify-between">
           {/* Logo */}
