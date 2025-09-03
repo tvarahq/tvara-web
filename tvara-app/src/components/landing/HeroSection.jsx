@@ -4,27 +4,27 @@ import arrow_down_circle from "../../assets/arrow_down_circle.svg";
 
 function HeroSection() {
   return (
-    <div className="h-screen flex items-end px-24 pb-12">
+    <div className="min-h-screen flex items-center md:items-end pb-8 md:pb-12 z-10 px-4 md:px-0">
       <div className="w-full">
         <div className="max-w-4xl">
-          <h1 className="text-7xl font-bold leading-tight">
+          <h1 className="text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
             Build AI Workflows <br />
             That Work While You Sleep
           </h1>
-          <p className="mt-4 text-2xl text-gray-300">
+          <p className="mt-3 md:mt-4 text-base sm:text-lg md:text-xl text-gray-300 font-light w-full md:w-[90%]">
             Tvara Canvas lets you design, connect, and deploy automations in
             minutes. With 10,000+ tools and an agentic engine, turn ideas into
             adaptive workflows that keep running while you sleep.
           </p>
         </div>
 
-        <div className="mt-6 flex w-full items-center justify-between">
-          <div className="flex gap-4">
-            <button className="px-3.5 py-2 h-16 border rounded-[20px] hover:bg-gray-800 transition cursor-pointer">
+        <div className="mt-6 md:mt-8 flex flex-col sm:flex-row w-full items-center justify-between gap-6 sm:gap-0 sm:translate-y-[-12px]">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+            <button className="w-full sm:w-auto px-4 py-2.5 sm:px-3.5 sm:py-2 border rounded-[10px] hover:bg-gray-800 transition cursor-pointer text-sm sm:text-base">
               <span>View Demo</span>
             </button>
-            <button className="px-3.5 py-2 h-16 bg-primary text-white font-bold rounded-[20px] hover:bg-primary/80 transition cursor-pointer">
-              <span className="flex items-center">
+            <button className="w-full sm:w-auto px-4 py-2.5 sm:px-3.5 sm:py-2 bg-primary/80 text-white font-bold rounded-[10px] hover:bg-primary/60 transition cursor-pointer text-sm sm:text-base">
+              <span className="flex items-center justify-center">
                 Join Waitlist
                 <img
                   src={right_arrow}
@@ -36,7 +36,7 @@ function HeroSection() {
           </div>
 
           <div
-            className="rotating-border"
+            className="rotating-border flex-shrink-0 hidden md:block"
             onClick={() => {
               const section = document.getElementById("explore");
               section?.scrollIntoView({ behavior: "smooth" });
@@ -45,7 +45,7 @@ function HeroSection() {
             <img
               src={arrow_down_circle}
               alt="Arrow Down Circle"
-              className="h-16 cursor-pointer relative z-10"
+              className="h-10 sm:h-12 cursor-pointer relative z-10"
             />
           </div>
         </div>
