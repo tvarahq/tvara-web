@@ -8,7 +8,7 @@ function Landing() {
   return (
     <div className="w-full bg-background text-white px-4 md:px-24 lg:px-34">
       <GridLayout className="z-0" />
-      <div className="relative">
+      <div className="relative z-10 md:z-0">
         <NavBar />
       </div>
       <HeroSection />
