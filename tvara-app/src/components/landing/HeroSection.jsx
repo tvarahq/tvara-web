@@ -4,7 +4,7 @@ import arrow_down_circle from "../../assets/arrow_down_circle.svg";
 
 function HeroSection() {
   return (
-    <div className="min-h-screen flex items-center md:items-end pb-8 md:pb-12 z-10 px-4 md:px-0">
+    <div className="min-h-screen flex items-center md:items-end pb-8 md:pb-12 z-10 px-4 md:px-24 lg:px-34 ">
       <div className="w-full">
         <div className="max-w-4xl">
           <h1 className="text-4xl sm:text-4xl md:text-6xl font-bold leading-tight">
@@ -35,19 +35,11 @@ function HeroSection() {
             </button>
           </div>
 
-          <div
-            className="rotating-border flex-shrink-0 hidden md:block"
-            onClick={() => {
-              const section = document.getElementById("explore");
-              section?.scrollIntoView({ behavior: "smooth" });
-            }}
-          >
             <img
               src={arrow_down_circle}
               alt="Arrow Down Circle"
               className="h-10 sm:h-12 cursor-pointer relative z-10"
             />
-          </div>
         </div>
       </div>
     </div>

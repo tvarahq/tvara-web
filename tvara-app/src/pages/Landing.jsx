@@ -3,16 +3,17 @@ import NavBar from "../components/landing/NavBar";
 import HeroSection from "../components/landing/HeroSection";
 import Explore from "../components/landing/Explore";
 import GridLayout from "../components/landing/GridLayout";
-
+import Essentials from "../components/landing/Essentials";
 function Landing() {
   return (
-    <div className="w-full bg-background text-white px-4 md:px-24 lg:px-34">
+    <div className="w-full bg-background text-white ">
       <GridLayout className="z-0" />
-      <div className="relative z-10 md:z-0">
+      <div className="relative z-10 md:z-0 px-4 md:px-24 lg:px-34">
         <NavBar />
       </div>
       <HeroSection />
       <Explore />
+      <Essentials />
     </div>
   );
 }
