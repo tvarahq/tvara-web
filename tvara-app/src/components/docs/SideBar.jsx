@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { sidebarData } from "../../utils/sidebar";
+import navbar_logo from "../../assets/navbar_logo.svg";
 
 function SideBar({ selectedAnchor, onAnchorSelect }) {
   const [expandedNodes, setExpandedNodes] = useState(new Set(["parent-0"]));
@@ -21,8 +23,14 @@ function SideBar({ selectedAnchor, onAnchorSelect }) {
 
   return (
     <div className="text-white border-r-[0.5px] border-gray-700 w-72 bg-black h-screen overflow-y-auto select-none custom-scrollbar">
-      <div className="flex items-center justify-between h-12 px-3 py-8 border-b-[0.5px] border-gray-700">
-        <h2 className="text-white font-bold text-2xl">Tvara Docs</h2>
+      <div className="flex items-center justify-center h-12 px-3 py-8 border-b-[0.5px] border-gray-700">
+        <Link to="/">
+          <img
+            src={navbar_logo}
+            alt="Logo"
+            className="h-8 md:h-10 cursor-pointer"
+          />
+        </Link>
       </div>
 
       <ul className="space-y-2 text-md p-4">

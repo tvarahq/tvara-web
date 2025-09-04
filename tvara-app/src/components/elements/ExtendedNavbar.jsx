@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import navbar_logo from "../../assets/navbar_logo.svg";
 import { Link } from "react-router-dom";
 import slack from "../../assets/slack.svg";
 import github from "../../assets/github.svg";
@@ -17,9 +16,9 @@ function ExtendedNavbar() {
         <div className="absolute inset-0 py-8 bg-background backdrop-blur-sm border-b-[0.5px] border-gray-700"></div>
 
         <div className="relative z-10 w-full flex items-center justify-between">
-          <Link to="/">
-            <img src={navbar_logo} alt="Logo" className="h-8 md:h-10 cursor-pointer" />
-          </Link>
+          <div>
+
+          </div>
 
           <div className="hidden md:block">
             <div className="flex gap-8 lg:gap-16 text-lg font-medium">
