@@ -54,10 +54,10 @@ export default function GridLayout() {
                     width: isHovered ? '8px' : '2px',
                     height: isHovered ? '8px' : '2px',
                     backgroundColor: isHovered 
-                      ? 'rgba(156, 163, 175, 0.9)' 
+                      ? '#39D0E8' 
                       : 'rgba(107, 114, 128, 0.6)',
                     boxShadow: isHovered
-                      ? '0 0 12px rgba(156, 163, 175, 0.8), 0 0 24px rgba(156, 163, 175, 0.4)'
+                      ? '20px 20px 30px #39D0E8, 20px 20px 24px #39D0E8'
                       : 'none',
                     transform: isHovered ? 'scale(1.5)' : 'scale(1)',
                   }}

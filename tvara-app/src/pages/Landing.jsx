@@ -4,6 +4,7 @@ import HeroSection from "../components/landing/HeroSection";
 import Explore from "../components/landing/Explore";
 import GridLayout from "../components/landing/GridLayout";
 import Essentials from "../components/landing/Essentials";
+import IntegratedToolsSection from "../components/landing/IntegratedToolsSection";
 function Landing() {
   return (
     <div className="w-full bg-background text-white ">
@@ -16,6 +17,7 @@ function Landing() {
       <HeroSection />
       <Explore />
       <Essentials />
+      <IntegratedToolsSection />
     </div>
   );
 }

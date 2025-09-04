@@ -73,3 +73,15 @@
   scrollbar-color: #374151 transparent;
   scroll-behavior: smooth;
 }
+
+
+.only-bottom-hidden {
+  position: relative;
+  overflow-y: visible;   /* keep y-axis visible */
+  -webkit-mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-image: linear-gradient(to bottom, black 95%, transparent 100%);
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}

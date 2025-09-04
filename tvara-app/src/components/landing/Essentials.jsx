@@ -20,23 +20,11 @@ export default function Essentials() {
   ];
 
   return (
-    <div className="min-h-screen text-white px-6 py-16 relative mt-10 overflow-x-hidden">
+    <div className="text-white px-6 md:py-16 relative md:mt-10 overflow-x-hidden">
       <div className='w-full flex flex-col items-center justify-center text-center gap-6'>
         <h1 className='text-4xl md:text-5xl font-bold mb-16 align-middle'>A Simpler Path to Scale with AI</h1>
       </div>
-      {/* Colorful Background Blobs */}
       <div className="absolute inset-0 overflow-x-hidden">
-        {/* Purple blob - top left */}
-        <div className="absolute top-20 left-80 w-[25rem] h-[35rem] bg-gradient-to-br from-purple-600 to-indigo-700 rounded-full blur-[120px] opacity-15"></div>
-
-        {/* Green blob - middle left */}
-        <div className="absolute top-20 -left-20 w-[30rem] h-[40rem] bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full blur-[120px] opacity-15"></div>
-
-        {/* Orange blob - bottom center */}
-        <div className="absolute top-20 right-25 transform -translate-x-1/2 w-[25rem] h-[40rem] bg-gradient-to-br from-orange-500 to-yellow-500 rounded-full blur-[120px] opacity-10"></div>
-
-        {/* Pink blob - bottom right */}
-        <div className="absolute top-20 -right-16 w-[25rem] h-[35rem] bg-gradient-to-br from-pink-500 to-rose-600 rounded-full blur-[120px] opacity-15"></div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -65,16 +53,7 @@ export default function Essentials() {
           ))}
         </div>
 
-        {/* Connect Everything Section */}
-        <div className="text-center max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Connect Everything
-          </h2>
-          <p className="text-gray-300 text-lg md:text-xl leading-relaxed">
-            Seamlessly integrate with your favorite tools and platforms. From
-            Composio to Slack, bring your AI agents into your existing workflows.
-          </p>
-        </div>
+
       </div>
     </div>
   );
