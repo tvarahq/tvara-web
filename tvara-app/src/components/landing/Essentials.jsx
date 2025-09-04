@@ -20,7 +20,7 @@ export default function Essentials() {
   ];
 
   return (
-    <div className="text-white px-6 md:py-16 relative md:mt-10 overflow-x-hidden">
+    <div className="text-white px-6 md:py-16 relative md:mt-10 overflow-x-hidden bg-transparent">
       <div className='w-full flex flex-col items-center justify-center text-center gap-6'>
         <h1 className='text-4xl md:text-5xl font-bold mb-16 align-middle'>A Simpler Path to Scale with AI</h1>
       </div>

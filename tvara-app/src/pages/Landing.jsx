@@ -5,9 +5,13 @@ import Explore from "../components/landing/Explore";
 import GridLayout from "../components/landing/GridLayout";
 import Essentials from "../components/landing/Essentials";
 import IntegratedToolsSection from "../components/landing/IntegratedToolsSection";
+import Features from "../components/landing/Features";
+import SideBlur from "../components/landing/SideBlur";
+import WhyUs from "../components/landing/WhyUs";
 function Landing() {
   return (
     <div className="w-full bg-background text-white ">
+      <SideBlur className="z-0 fixed" />
       <div className="z-0 hidden md:block">
         <GridLayout />
       </div>
@@ -18,6 +22,8 @@ function Landing() {
       <Explore />
       <Essentials />
       <IntegratedToolsSection />
+      <Features />
+      <WhyUs />
     </div>
   );
 }

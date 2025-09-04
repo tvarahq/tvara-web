@@ -7,6 +7,8 @@ import {
   Plane,
 } from "lucide-react";
 
+import { Box, GitBranch, Server, Bookmark, Clock, Sun } from "lucide-react";
+
 export const buttons = [
   {
     id: 1,
@@ -49,5 +51,44 @@ export const buttons = [
     description: "Move from concept to execution in minutes. ",
     icon: Plane,
     icon_color: "#00C7BE",
+  },
+];
+
+export const features = [
+  {
+    icon: Box,
+    title: "Under the Hood: SDK v1",
+    description:
+      "Behind the Canvas is our open-source SDK, ready for developers today. Build, extend, and customize agent workflows with Python.",
+  },
+  {
+    icon: GitBranch,
+    title: "Plug and Play Agents",
+    description:
+      "Create agents with memory, caching, and tools in just a few lines of code.",
+  },
+  {
+    icon: Server,
+    title: "Two Workflow Modes",
+    description:
+      "Run linear flows with Sequential mode or give a manager agent control with Supervised mode.",
+  },
+  {
+    icon: Bookmark,
+    title: "Open Source and Documented",
+    description:
+      "Extend it, fork it, break it, or contribute. Everything is transparent and ready for builders.",
+  },
+  {
+    icon: Clock,
+    title: "Get started in Seconds",
+    description:
+      "Tvara SDK is ready to use today. Install it directly from PyPI and start building your first agent in minutes. pip install tvara",
+  },
+  {
+    icon: Sun,
+    title: "Low effort",
+    description:
+      "Once installed, create your first agent with just a few lines of code. The SDK handles workflows, memory, authentication and tools out of the box, so you can focus on building.",
   },
 ];
