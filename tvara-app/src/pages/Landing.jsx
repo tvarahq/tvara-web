@@ -7,7 +7,9 @@ import Essentials from "../components/landing/Essentials";
 function Landing() {
   return (
     <div className="w-full bg-background text-white ">
-      <GridLayout className="z-0" />
+      <div className="z-0 hidden md:block">
+        <GridLayout />
+      </div>
       <div className="relative z-10 md:z-0 px-4 md:px-24 lg:px-34">
         <NavBar />
       </div>
