@@ -10,7 +10,7 @@ function Landing() {
       <div className="z-0 hidden md:block">
         <GridLayout />
       </div>
-      <div className="relative z-10 md:z-0 px-4 md:px-24 lg:px-34">
+      <div className="relative z-10 px-4 md:px-24 lg:px-34">
         <NavBar />
       </div>
       <HeroSection />
