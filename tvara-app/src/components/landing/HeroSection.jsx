@@ -4,7 +4,7 @@ import arrow_down_circle from "../../assets/arrow_down_circle.svg";
 
 function HeroSection() {
   return (
-    <div className="min-h-screen flex items-center md:items-end pb-8 md:pb-12 z-10 px-4 md:px-24 lg:px-34 ">
+    <div className="min-h-screen flex items-center md:items-end pb-8 md:pb-18 z-10 px-4 md:px-24 lg:px-18">
       <div className="w-full">
         <div className="max-w-4xl">
           <h1 className="text-4xl sm:text-4xl md:text-6xl font-bold leading-tight">
@@ -39,6 +39,12 @@ function HeroSection() {
               src={arrow_down_circle}
               alt="Arrow Down Circle"
               className="h-10 sm:h-12 cursor-pointer relative z-10"
+              onClick={() => {
+                const exploreSection = document.getElementById("explore");
+                if (exploreSection) {
+                  exploreSection.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
             />
         </div>
       </div>
