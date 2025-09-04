@@ -4,7 +4,7 @@ import arrow_down_circle from "../../assets/arrow_down_circle.svg";
 
 function HeroSection() {
   return (
-    <div className="md:min-h-screen h-[80vh] flex items-center md:items-end md:pb-18 z-10 px-4 md:px-24 lg:px-24">
+    <div className="md:min-h-screen h-[80vh] flex items-center md:items-end md:pb-18 z-10 px-4 md:px-24 lg:px-36">
       <div className="w-full">
         <div className="max-w-4xl">
           <h1 className="text-4xl sm:text-4xl md:text-6xl font-bold leading-tight drop-shadow-2xl">

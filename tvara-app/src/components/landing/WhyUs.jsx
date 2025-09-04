@@ -3,7 +3,7 @@ import { Users, Zap, Heart, Github, ArrowRight, Sparkles } from 'lucide-react';
 import right_arrow from "../../assets/right_arrow.svg";
 export default function CommunitySection() {
     return (
-        <div className="min-h-screen flex items-center justify-center px-4 md:px-24 lg:px-24">
+        <div className="min-h-screen flex items-center justify-center px-4 md:px-24">
             <div className="relative mt-20">
                 {/* Main Header */}
                 <div className="text-center mb-12">
