@@ -1,6 +1,5 @@
 import React from "react";
 import right_arrow from "../../assets/right_arrow.svg";
-import arrow_down_circle from "../../assets/arrow_down_circle.svg";
 
 function HeroSection() {
   return (
@@ -35,17 +34,40 @@ function HeroSection() {
             </button>
           </div>
 
-            <img
-              src={arrow_down_circle}
-              alt="Arrow Down Circle"
-              className="h-10 sm:h-12 cursor-pointer relative z-10"
-              onClick={() => {
-                const exploreSection = document.getElementById("explore");
-                if (exploreSection) {
-                  exploreSection.scrollIntoView({ behavior: "smooth" });
-                }
-              }}
-            />
+          <div
+            className="cursor-pointer group"
+            onClick={() => {
+              const exploreSection = document.getElementById("explore");
+              if (exploreSection) {
+                exploreSection.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-10 sm:h-12 transition-colors duration-300 group-hover:fill-primary group-hover:text-white"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="11"
+                className="stroke-current text-primary fill-transparent group-hover:fill-primary transition-colors duration-300"
+                strokeWidth="1"
+              />
+              <line x1="12" y1="7" x2="12" y2="16" className="stroke-primary
+              group-hover:stroke-white transition-colors duration-300"
+              strokeWidth="1" strokeLinecap="round" />
+              <polyline
+                points="8,11 12,16 16,11"
+                className="stroke-primary group-hover:stroke-white transition-colors duration-300"
+                strokeWidth="1"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
         </div>
       </div>
     </div>
