@@ -8,23 +8,27 @@ import IntegratedToolsSection from "../components/landing/IntegratedToolsSection
 import Features from "../components/landing/Features";
 import SideBlur from "../components/landing/SideBlur";
 import WhyUs from "../components/landing/WhyUs";
+import TvaraLoadingWrapper from "../components/TvaraLoadingWrapper";
+
 function Landing() {
   return (
-    <div className="w-full bg-background text-white ">
-      <SideBlur className="z-0 fixed" />
-      <div className="z-0 hidden md:block">
-        <GridLayout />
+    <TvaraLoadingWrapper>
+      <div className="w-full bg-background text-white ">
+        <SideBlur className="z-0 fixed" />
+        <div className="z-0 hidden md:block">
+          <GridLayout />
+        </div>
+        <div className="relative z-10 px-4 md:px-24 lg:px-34">
+          <NavBar />
+        </div>
+        <HeroSection />
+        <Explore />
+        <Essentials />
+        <IntegratedToolsSection />
+        <Features />
+        <WhyUs />
       </div>
-      <div className="relative z-10 px-4 md:px-24 lg:px-34">
-        <NavBar />
-      </div>
-      <HeroSection />
-      <Explore />
-      <Essentials />
-      <IntegratedToolsSection />
-      <Features />
-      <WhyUs />
-    </div>
+    </TvaraLoadingWrapper>
   );
 }
 
