@@ -20,7 +20,7 @@ const FeatureCard = ({ icon: Icon, title, description, className = "" }) => {
 const Features = () => {
 
   return (
-    <div className="min-h-screen mt-30 px-4 md:px-24 lg:px-24">
+    <div className="mt-30 px-4 md:px-24 lg:px-24">
       <div className="">
         <div className="bg-[#c7e2dd] rounded-2xl shadow-xl overflow-hidden">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">

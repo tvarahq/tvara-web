@@ -21,6 +21,7 @@
 }
 
 body{
+  @apply font-sans;
   background: black;
 }
 
