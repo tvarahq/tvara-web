@@ -9,6 +9,7 @@ import Features from "../components/landing/Features";
 import SideBlur from "../components/landing/SideBlur";
 import WhyUs from "../components/landing/WhyUs";
 import TvaraLoadingWrapper from "../components/TvaraLoadingWrapper";
+import Footer from "../components/Footer";
 
 function Landing() {
   return (
@@ -27,6 +28,7 @@ function Landing() {
         <IntegratedToolsSection />
         <Features />
         <WhyUs />
+        <Footer />
       </div>
     </TvaraLoadingWrapper>
   );
