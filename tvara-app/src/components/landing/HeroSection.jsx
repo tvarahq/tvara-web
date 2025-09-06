@@ -46,7 +46,7 @@ animate="visible"
         </motion.div>
 
         <motion.p
-          className="mt-3 md:mt-4 text-base sm:text-lg md:text-xl text-gray-300 font-light w-full md:w-[90%]"
+          className="mt-3 md:mt-4 text-base sm:text-lg md:text-xl text-gray-300 font-light w-full md:w-[65%]"
           variants={fadeUp}
         >
           Tvara Canvas lets you design, connect, and deploy automations in

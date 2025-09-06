@@ -20,6 +20,10 @@
   }
 }
 
+body{
+  background: black;
+}
+
 .rotating-border {
   position: relative;
   display: inline-block;

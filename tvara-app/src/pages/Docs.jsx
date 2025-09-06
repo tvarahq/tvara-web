@@ -49,7 +49,7 @@ function Docs() {
         );
 
         return (
-          <div className="mb-6">
+          <div className="mb-6 bg-black">
             <div className="bg-gray-900 rounded-t-lg border-b border-gray-700">
               <div className="flex items-center justify-between px-4 py-2">
                 <div className="flex items-center gap-2">
@@ -102,7 +102,7 @@ function Docs() {
   };
 
   return (
-    <div className="bg-background h-screen flex">
+    <div className="bg-background flex">
       <div className="flex-1 flex flex-col text-white">
         <ExtendedNavbar />
 
