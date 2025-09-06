@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import slack from "../../assets/slack.svg";
 import github from "../../assets/github.svg";
+import navbar_logo from "../../assets/navbar_logo.svg";
 
 function ExtendedNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,14 +18,26 @@ function ExtendedNavbar() {
 
         <div className="relative z-10 w-full flex items-center justify-between">
           <div>
-
+            <Link to="/">
+              <img
+                src={navbar_logo}
+                alt="Logo"
+                className="h-8 md:h-10 cursor-pointer"
+              />
+            </Link>
           </div>
 
           <div className="hidden md:block">
             <div className="flex gap-8 lg:gap-16 text-lg font-medium">
-              <Link to="/" className="hover:text-gray-300 transition">Home</Link>
-              <Link to="/blog" className="hover:text-gray-300 transition">Blog</Link>
-              <Link to="/docs" className="hover:text-gray-300 transition">Docs</Link>
+              <Link to="/" className="hover:text-gray-300 transition">
+                Home
+              </Link>
+              <Link to="/blog" className="hover:text-gray-300 transition">
+                Blog
+              </Link>
+              <Link to="/docs" className="hover:text-gray-300 transition">
+                Docs
+              </Link>
             </div>
           </div>
 
@@ -46,14 +59,26 @@ function ExtendedNavbar() {
             onClick={toggleMobileMenu}
             aria-label="Toggle menu"
           >
-            <span className={`block w-5 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-1.5' : ''}`}></span>
-            <span className={`block w-5 h-0.5 bg-white my-1 transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`block w-5 h-0.5 bg-white transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-1.5' : ''}`}></span>
+            <span
+              className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
+                isMobileMenuOpen ? "rotate-45 translate-y-1.5" : ""
+              }`}
+            ></span>
+            <span
+              className={`block w-5 h-0.5 bg-white my-1 transition-all duration-300 ${
+                isMobileMenuOpen ? "opacity-0" : ""
+              }`}
+            ></span>
+            <span
+              className={`block w-5 h-0.5 bg-white transition-all duration-300 ${
+                isMobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""
+              }`}
+            ></span>
           </button>
         </div>
       </nav>
 
-        {/* MOBILE */}
+      {/* MOBILE */}
 
       <div
         className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300 md:hidden ${
@@ -62,14 +87,34 @@ function ExtendedNavbar() {
       >
         <div
           className={`fixed top-[100px] left-0 w-full bg-[#222020] border-t border-[#5e5656]/30 transition-all duration-300 ${
-            isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
+            isMobileMenuOpen
+              ? "translate-y-0 opacity-100"
+              : "-translate-y-4 opacity-0"
           }`}
         >
           <div className="p-6 space-y-6">
             <div className="space-y-4">
-              <Link to="/" onClick={() => setIsMobileMenuOpen(false)} className="block text-white hover:text-gray-300 text-lg">Home</Link>
-              <Link to="/blog" onClick={() => setIsMobileMenuOpen(false)} className="block text-white hover:text-gray-300 text-lg">Blog</Link>
-              <Link to="/docs" onClick={() => setIsMobileMenuOpen(false)} className="block text-white hover:text-gray-300 text-lg">Docs</Link>
+              <Link
+                to="/"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block text-white hover:text-gray-300 text-lg"
+              >
+                Home
+              </Link>
+              <Link
+                to="/blog"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block text-white hover:text-gray-300 text-lg"
+              >
+                Blog
+              </Link>
+              <Link
+                to="/docs"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block text-white hover:text-gray-300 text-lg"
+              >
+                Docs
+              </Link>
             </div>
 
             <div className="space-y-3 pt-4 border-t border-[#5e5656]/30">

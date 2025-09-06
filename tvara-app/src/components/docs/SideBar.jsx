@@ -1,11 +1,160 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronDown, ChevronRight } from "lucide-react";
-import { sidebarData } from "../../utils/sidebar";
-import navbar_logo from "../../assets/navbar_logo.svg";
+import { docsContent } from "../../utils/docsContent";
 
 function SideBar({ selectedAnchor, onAnchorSelect }) {
   const [expandedNodes, setExpandedNodes] = useState(new Set(["parent-0"]));
+
+  const sidebarData = [
+    {
+      id: "parent-0",
+      title: "Getting Started",
+      children: [
+        {
+          id: "child-0-0",
+          title: "Overview",
+          anchors: [{ id: "anchor-0-0", title: docsContent["anchor-0-0"]?.title || "Getting Started" }]
+        },
+        {
+          id: "child-0-1", 
+          title: "Setup",
+          anchors: [
+            { id: "anchor-0-1", title: docsContent["anchor-0-1"]?.title || "Installation" },
+            { id: "anchor-0-2", title: docsContent["anchor-0-2"]?.title || "Quick Start" }
+          ]
+        }
+      ]
+    },
+    {
+      id: "parent-1",
+      title: "Core Concepts",
+      children: [
+        {
+          id: "child-1-0",
+          title: "Agents",
+          anchors: [
+            { id: "anchor-1-0", title: docsContent["anchor-1-0"]?.title || "Agents" },
+            { id: "anchor-1-1", title: docsContent["anchor-1-1"]?.title || "Agent Configuration" },
+            { id: "anchor-1-2", title: docsContent["anchor-1-2"]?.title || "Supported Models" }
+          ]
+        }
+      ]
+    },
+    {
+      id: "parent-2",
+      title: "Workflows",
+      children: [
+        {
+          id: "child-2-0",
+          title: "Workflow Types",
+          anchors: [
+            { id: "anchor-2-0", title: docsContent["anchor-2-0"]?.title || "Workflows" },
+            { id: "anchor-2-1", title: docsContent["anchor-2-1"]?.title || "Sequential Workflows" },
+            { id: "anchor-2-2", title: docsContent["anchor-2-2"]?.title || "Supervised Workflows" }
+          ]
+        }
+      ]
+    },
+    {
+      id: "parent-3",
+      title: "Integrations",
+      children: [
+        {
+          id: "child-3-0",
+          title: "Tools & Services",
+          anchors: [
+            { id: "anchor-3-0", title: docsContent["anchor-3-0"]?.title || "Tools & Integrations" },
+            { id: "anchor-3-1", title: docsContent["anchor-3-1"]?.title || "Authentication & Caching" }
+          ]
+        }
+      ]
+    },
+    {
+      id: "parent-4",
+      title: "Configuration",
+      children: [
+        {
+          id: "child-4-0",
+          title: "Setup & Customization",
+          anchors: [
+            { id: "anchor-4-0", title: docsContent["anchor-4-0"]?.title || "Configuration" },
+            { id: "anchor-4-1", title: docsContent["anchor-4-1"]?.title || "Custom Prompts" }
+          ]
+        }
+      ]
+    },
+    {
+      id: "parent-5",
+      title: "Advanced Usage",
+      children: [
+        {
+          id: "child-5-0",
+          title: "Workflow Management",
+          anchors: [
+            { id: "anchor-5-0", title: docsContent["anchor-5-0"]?.title || "Workflow Management" },
+            { id: "anchor-5-1", title: docsContent["anchor-5-1"]?.title || "Result Handling" }
+          ]
+        }
+      ]
+    },
+    {
+      id: "parent-6",
+      title: "Best Practices",
+      children: [
+        {
+          id: "child-6-0",
+          title: "Guidelines & Optimization",
+          anchors: [
+            { id: "anchor-6-0", title: docsContent["anchor-6-0"]?.title || "Best Practices" },
+            { id: "anchor-6-1", title: docsContent["anchor-6-1"]?.title || "Debugging & Monitoring" }
+          ]
+        }
+      ]
+    },
+    {
+      id: "parent-7",
+      title: "Examples",
+      children: [
+        {
+          id: "child-7-0",
+          title: "Use Cases & Features",
+          anchors: [
+            { id: "anchor-7-0", title: docsContent["anchor-7-0"]?.title || "Examples & Use Cases" },
+            { id: "anchor-7-1", title: docsContent["anchor-7-1"]?.title || "Advanced Features" }
+          ]
+        }
+      ]
+    },
+    {
+      id: "parent-8",
+      title: "Help & Support",
+      children: [
+        {
+          id: "child-8-0",
+          title: "Common Issues",
+          anchors: [
+            { id: "anchor-8-0", title: docsContent["anchor-8-0"]?.title || "FAQ" },
+            { id: "anchor-8-1", title: docsContent["anchor-8-1"]?.title || "Troubleshooting" }
+          ]
+        }
+      ]
+    },
+    {
+      id: "parent-9",
+      title: "Community",
+      children: [
+        {
+          id: "child-9-0",
+          title: "Get Involved",
+          anchors: [
+            { id: "anchor-9-0", title: docsContent["anchor-9-0"]?.title || "Community & Support" },
+            { id: "anchor-9-1", title: docsContent["anchor-9-1"]?.title || "Roadmap & Future" }
+          ]
+        }
+      ]
+    }
+  ];
 
   const toggleNode = (nodeId) => {
     const newExpanded = new Set(expandedNodes);
@@ -23,15 +172,6 @@ function SideBar({ selectedAnchor, onAnchorSelect }) {
 
   return (
     <div className="text-white border-r-[0.5px] border-gray-700 w-72 bg-black h-screen overflow-y-auto select-none custom-scrollbar">
-      <div className="flex items-center justify-center h-12 px-3 py-8 border-b-[0.5px] border-gray-700">
-        <Link to="/">
-          <img
-            src={navbar_logo}
-            alt="Logo"
-            className="h-8 md:h-10 cursor-pointer"
-          />
-        </Link>
-      </div>
 
       <ul className="space-y-2 text-md p-4">
         {sidebarData.map((parentNode) => (
