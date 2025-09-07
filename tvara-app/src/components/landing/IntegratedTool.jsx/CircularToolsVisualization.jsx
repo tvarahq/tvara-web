@@ -6,7 +6,7 @@ const CircularToolsVisualization = () => {
     const outerTools = [...tools.slice(6, 64)];
 
     return (
-        <div className="flex-1 items-center justify-center hidden md:flex px-6 py-12 lg:py-0 translate-x-[20rem]">
+        <div className="flex-1 items-center justify-center hidden md:flex px-6 py-12 lg:py-0 translate-x-[24rem]">
             <div className="relative w-full max-w-2xl h-96 md:h-[500px] lg:h-[600px]">
                 {/* Connecting circles */}
                 <div className="absolute inset-0 flex items-center justify-center">

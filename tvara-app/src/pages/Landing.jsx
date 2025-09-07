@@ -11,6 +11,8 @@ import WhyUs from "../components/landing/WhyUs";
 import TvaraLoadingWrapper from "../components/TvaraLoadingWrapper";
 import Installation from "../components/landing/Installation";
 import Footer from "../components/Footer";
+import AnimatedBackground from "../components/landing/AnimatedBackground";
+import SDKSection from "../components/landing/SDKSection";
 
 function Landing() {
   return (
@@ -25,10 +27,14 @@ function Landing() {
         </div>
         <HeroSection />
         <Explore />
-        <Essentials />
-        <IntegratedToolsSection />
-        <Features />
+
+        <AnimatedBackground>
+          <Essentials />
+          <IntegratedToolsSection />
+        </AnimatedBackground>
+        <SDKSection />
         <Installation />
+        <Features />
         <WhyUs />
         <Footer />
       </div>

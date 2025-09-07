@@ -15,7 +15,7 @@ function Installation() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center px-4 mt-30">
+    <div className="flex flex-col items-center justify-center px-4 mt-10">
       <h1 className="text-6xl md:text-7xl font-bold text-white mb-4">
         Installation
       </h1>
