@@ -33,9 +33,9 @@ function HeroSection() {
   return (
     <motion.div
       className="md:min-h-screen h-[80vh] flex items-center md:items-end md:pb-18 z-10 px-4 md:px-24 lg:px-36"
-variants={containerVariants}
-initial="hidden"
-animate="visible"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
     >
       <div className="w-full">
         <motion.div className="max-w-4xl" variants={fadeUp}>

@@ -32,6 +32,7 @@ function Landing() {
           <Essentials />
           <IntegratedToolsSection />
         </AnimatedBackground>
+
         <SDKSection />
         <Installation />
         <Features />
