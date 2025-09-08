@@ -78,23 +78,23 @@ export const features = [
   },
   {
     index:4,
-    icon: Bookmark,
-    title: "Open Source and Documented",
+    icon: Sun,
+    title: "Customizable",
     description:
-      "Extend it, fork it, break it, or contribute. Everything is transparent and ready for builders.",
+      "Create your own prompts, tools and integrations, ready to plug into your agents.",
   },
   {
     index:5,
     icon: Clock,
     title: "Get started in Seconds",
     description:
-      "Tvara SDK is ready to use today. Install it directly from PyPI and start building your first agent in minutes. pip install tvara",
+    "Tvara SDK is ready to use today. Install it directly from PyPI and start building your first agent in minutes.",
   },
   {
     index:6,
-    icon: Sun,
-    title: "Low effort",
+    icon: Bookmark,
+    title: "Open Source and Documented",
     description:
-      "Once installed, create your first agent with just a few lines of code. The SDK handles workflows, memory, authentication and tools out of the box, so you can focus on building.",
+      "Extend it, fork it, break it, or contribute. Everything is transparent and ready for builders.",
   },
 ];
