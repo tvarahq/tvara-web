@@ -43,7 +43,7 @@ export default function Essentials() {
         scale,
         opacity
       }} 
-      className="text-white px-6 md:py-16 relative md:mt-10 overflow-hidden rounded-t-[3rem] bg-transparent">
+      className="text-white px-6 md:py-16 relative md:mt-10  overflow-hidden rounded-t-[3rem] bg-transparent">
 
       <div className='w-full flex flex-col items-center justify-center text-center gap-6'>
         <h1 className='text-4xl md:text-5xl font-bold mb-16 align-middle bg-gradient-to-r from-white via-cyan-200 to-blue-200 bg-clip-text text-transparent'>

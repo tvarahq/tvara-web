@@ -91,7 +91,7 @@ print(response)
     <motion.section
       ref={targetRef}
       style={{ y, opacity }}
-      className="min-h-screen py-20 px-6 relative overflow-hidden bg-black"
+      className="py-20 px-6 relative overflow-hidden"
     >
       {/* Background decorative elements */}
       <div className="absolute inset-0 opacity-10">

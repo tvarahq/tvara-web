@@ -109,12 +109,12 @@ function Landing() {
         <div className="relative z-10 px-4 md:px-24 lg:px-34">
           <NavBar />
         </div>
-        
+
         {/* Add id attributes to sections for smooth scrolling navigation */}
         <section id="hero">
           <HeroSection />
         </section>
-        
+
         <section id="explore">
           <Explore />
         </section>
@@ -132,7 +132,11 @@ function Landing() {
         <Installation />
         <Features />
         <WhyUs />
-        <CallToActionSection />
+
+        <AnimatedBackground>
+          <CallToActionSection />
+        </AnimatedBackground>
+        
         <Footer />
       </div>
     </TvaraLoadingWrapper>
