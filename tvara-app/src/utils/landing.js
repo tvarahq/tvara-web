@@ -56,36 +56,42 @@ export const buttons = [
 
 export const features = [
   {
+    index:1,
     icon: Box,
     title: "Under the Hood: SDK v1",
     description:
       "Behind the Canvas is our open-source SDK, ready for developers today. Build, extend, and customize agent workflows with Python.",
   },
   {
+    index:2,
     icon: GitBranch,
     title: "Plug and Play Agents",
     description:
       "Create agents with memory, caching, and tools in just a few lines of code.",
   },
   {
+    index:3,
     icon: Server,
     title: "Two Workflow Modes",
     description:
       "Run linear flows with Sequential mode or give a manager agent control with Supervised mode.",
   },
   {
+    index:4,
     icon: Bookmark,
     title: "Open Source and Documented",
     description:
       "Extend it, fork it, break it, or contribute. Everything is transparent and ready for builders.",
   },
   {
+    index:5,
     icon: Clock,
     title: "Get started in Seconds",
     description:
       "Tvara SDK is ready to use today. Install it directly from PyPI and start building your first agent in minutes. pip install tvara",
   },
   {
+    index:6,
     icon: Sun,
     title: "Low effort",
     description:
