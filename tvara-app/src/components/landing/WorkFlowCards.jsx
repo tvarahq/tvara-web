@@ -1,84 +1,83 @@
-import React from 'react'
-import { motion, useTransform } from 'framer-motion'
-
+import React, { useRef } from 'react'
+import { motion, useTransform, useScroll } from 'framer-motion'
+import Card1 from '../../assets/why_us_card1.png'
+import Card2 from '../../assets/why_us_card2.png'
+import Card3 from '../../assets/why_us_card3.png'
 export default function WorkFlowCards({ cardData, scrollYProgress }) {
-    // Opacity for texts
-    const textOpacity1 = useTransform(scrollYProgress, [0, 0.25, 0.33], [1, 1, 0])
-    const textOpacity2 = useTransform(scrollYProgress, [0.33, 0.5, 0.66], [0, 1, 0])
-    const textOpacity3 = useTransform(scrollYProgress, [0.66, 0.8, 1], [0, 1, 1])
 
-    // Slide-in effect for images
-    const image1Y = useTransform(scrollYProgress, [0.33, 0.33], ["0%", "0%"]); // move fully out
-    const image2Y = useTransform(scrollYProgress, [0.33, 0.66], ["100%", "0%"]); // comes fully in
-    const image3Y = useTransform(scrollYProgress, [0.66, 1], ["100%", "0%"]); // comes fully in
-    // slides up over img2
+    const card1Y = useTransform(scrollYProgress, [0.33, 0.33], ["0%", "0%"]);
+    const card2Y = useTransform(scrollYProgress, [0.33, 0.66], ["100%", "0%"]);
+    const card3Y = useTransform(scrollYProgress, [0.66, 0.95], ["100%", "0%"]);
 
     return (
-        <div className="relative w-full h-[90vh] flex rounded-full">
-            {/* Left: Text content */}
-            <div className="bg-background w-[55%] h-[100vh] p-10 flex flex-col justify-center relative overflow-hidden">
-                {/* Card 1 text */}
+        <div className="relative w-full h-[100vh] flex">
+            <div className="w-full h-[90vh] relative overflow-hidden mt-[30px]">
+
+                {/* Card 1 (base card) - Muted blue/slate gradient */}
                 <motion.div
-                    style={{ opacity: textOpacity1 }}
-                    className="absolute inset-0 flex flex-col items-start justify-center p-10 gap-6"
+                    style={{ y: card1Y }}
+                    className="absolute inset-0 bg-gradient-to-br from-slate-800 to-neutral-900 backdrop-blur-sm rounded-2xl flex flex-col items-start justify-center p-8 lg:p-16 gap-8 overflow-hidden"
                 >
-                    <div className="p-3 bg-blue-500/20 rounded-2xl">
-                        {React.createElement(cardData[0].icon, { className: "w-6 h-6 text-blue-300" })}
+                    <div className="p-4 bg-slate-600/30 rounded-3xl backdrop-blur-sm border border-slate-500">
+                        {React.createElement(cardData[0].icon, { className: "w-8 h-8 text-slate-300" })}
                     </div>
-                    <h1 className="text-4xl text-primary/80 font-semibold">{cardData[0].title}</h1>
-                    <p className="text-gray-300">{cardData[0].description}</p>
+                    <h1 className="text-4xl lg:text-6xl text-white font-bold leading-tight">
+                        {cardData[0].title}
+                    </h1>
+                    <p className="text-xl text-gray-300 leading-relaxed max-w-4xl">
+                        {cardData[0].description}
+                    </p>
+                    <img src={Card1} alt="Card 1 Visual" className="absolute h-[600px] mt-4 left-1/2 rotate-100 top-0 opacity-15" />
+                    <div className="flex space-x-2">
+                        <div className="w-3 h-3 bg-slate-300 rounded-full"></div>
+                        <div className="w-3 h-3 bg-gray-600 rounded-full"></div>
+                        <div className="w-3 h-3 bg-gray-600 rounded-full"></div>
+                    </div>
                 </motion.div>
 
-                {/* Card 2 text */}
+                {/* Card 2 (slides over card 1) - Muted green/emerald gradient */}
                 <motion.div
-                    style={{ opacity: textOpacity2 }}
-                    className="absolute inset-0 flex flex-col items-start justify-center p-10 gap-6"
+                    style={{ y: card2Y }}
+                    className="absolute inset-0 bg-gradient-to-br from-emerald-800 to-slate-800 backdrop-blur-sm rounded-2xl flex flex-col items-start justify-center p-8 lg:p-16 gap-8 overflow-hidden"
                 >
-                    <div className="p-3 bg-blue-500/20 rounded-2xl">
-                        {React.createElement(cardData[1].icon, { className: "w-6 h-6 text-blue-300" })}
+                    <div className="p-4 bg-emerald-700/30 rounded-3xl backdrop-blur-sm border border-emerald-600/20">
+                        {React.createElement(cardData[1].icon, { className: "w-8 h-8 text-emerald-300" })}
                     </div>
-                    <h1 className="text-4xl text-primary/80 font-semibold">{cardData[1].title}</h1>
-                    <p className="text-gray-300">{cardData[1].description}</p>
+                    <h1 className="text-4xl lg:text-6xl text-white font-bold leading-tight">
+                        {cardData[1].title}
+                    </h1>
+                    <p className="text-xl text-gray-300 leading-relaxed max-w-4xl">
+                        {cardData[1].description}
+                    </p>
+                    <img src={Card2} alt="Card 1 Visual" className="absolute h-[600px] mt-4 left-1/2 rotate-45 top-0 opacity-30" />
+                    <div className="flex space-x-2">
+                        <div className="w-3 h-3 bg-gray-600 rounded-full"></div>
+                        <div className="w-3 h-3 bg-emerald-600 rounded-full"></div>
+                        <div className="w-3 h-3 bg-gray-600 rounded-full"></div>
+                    </div>
                 </motion.div>
 
-                {/* Card 3 text */}
+                {/* Card 3 (slides over card 2) - Muted amber/stone gradient */}
                 <motion.div
-                    style={{ opacity: textOpacity3 }}
-                    className="absolute inset-0 flex flex-col items-start justify-center p-10 gap-6"
+                    style={{ y: card3Y }}
+                    className="absolute inset-0 bg-gradient-to-br from-[#2e5d70] to-gray-800 backdrop-blur-sm rounded-2xl flex flex-col items-start justify-center p-8 lg:p-16 gap-8 overflow-hidden"
                 >
-                    <div className="p-3 bg-blue-500/20 rounded-2xl">
-                        {React.createElement(cardData[2].icon, { className: "w-6 h-6 text-blue-300" })}
+                    <div className="p-4 bg-[#2e5d70]/10 rounded-3xl backdrop-blur-sm border border-gray-500">
+                        {React.createElement(cardData[2].icon, { className: "w-8 h-8 text-gray-500" })}
                     </div>
-                    <h1 className="text-4xl text-primary/80 font-semibold">{cardData[2].title}</h1>
-                    <p className="text-gray-300">{cardData[2].description}</p>
+                    <h1 className="text-4xl lg:text-6xl text-white font-bold leading-tight">
+                        {cardData[2].title}
+                    </h1>
+                    <p className="text-xl text-gray-300 leading-relaxed max-w-4xl">
+                        {cardData[2].description}
+                    </p>
+                    <img src={Card3} alt="Card 1 Visual" className="absolute h-[800px] mt-4 left-[55%]  top-[40%] rotate-45 opacity-15" />
+                    <div className="flex space-x-2">
+                        <div className="w-3 h-3 bg-gray-600 rounded-full"></div>
+                        <div className="w-3 h-3 bg-gray-600 rounded-full"></div>
+                        <div className="w-3 h-3 bg-[#2e5d70] rounded-full"></div>
+                    </div>
                 </motion.div>
-            </div>
-
-            {/* Right: Sliding images */}
-            <div className="w-[45%] h-[80vh] relative overflow-hidden pt-20">
-                {/* Image 1 (base) */}
-                <motion.img
-                    src={cardData[0].image}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover top-30 rounded-xl"
-                    style={{ y: image1Y }}
-                />
-
-                {/* Image 2 (slides in over 1) */}
-                <motion.img
-                    src={cardData[1].image}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover top-30 rounded-xl"
-                    style={{ y: image2Y }}
-                />
-
-                {/* Image 3 (slides in over 2) */}
-                <motion.img
-                    src={cardData[2].image}
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover top-30 rounded-xl"
-                    style={{ y: image3Y }}
-                />
             </div>
         </div>
     )
