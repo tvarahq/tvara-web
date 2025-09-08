@@ -7,27 +7,35 @@ function HeroSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.3, delayChildren: 2 }
-    }
+      transition: { staggerChildren: 0.3, delayChildren: 2 },
+    },
   };
 
   const fadeUp = {
     hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
   };
 
   const buttonVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-    hover: { scale: 1.05, transition: { type: "spring", stiffness: 300 } }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+    hover: { scale: 1.05, transition: { type: "spring", stiffness: 300 } },
   };
 
   // Scroll icon subtle bounce
   const iconVariants = {
     animate: {
       y: [0, 6, 0],
-      transition: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
-    }
+      transition: { duration: 1.5, repeat: Infinity, ease: "easeInOut" },
+    },
   };
 
   return (
@@ -64,12 +72,20 @@ function HeroSection() {
               variants={buttonVariants}
               whileHover="hover"
             >
-              <span>View Demo</span>
+              <a href="https://blog.tvarahq.com/meet-tvara-v1-build-agents-and-workflows-without-the-hassle" target="_blank" rel="noopener noreferrer">
+                <span>Release Blog</span>
+              </a>
             </motion.button>
             <motion.button
               className="w-full sm:w-auto px-4 py-2.5 sm:px-3.5 sm:py-2 bg-primary/80 text-white font-bold rounded-[10px] transition cursor-pointer text-sm sm:text-base"
               variants={buttonVariants}
               whileHover="hover"
+              onClick={() => {
+                const cta = document.getElementById("cta");
+                if (cta) {
+                  cta.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
             >
               <span className="flex items-center justify-center">
                 Join Waitlist
