@@ -20,7 +20,7 @@ export const buttons = [
   {
     id: 2,
     title: "Drag, Drop",
-    description: "Build automation like blocks—no wiring mess.",
+    description: "Build automation like blocks, no wiring mess.",
     icon: SquareDashedMousePointer,
     icon_color: "#9747FF",
   },
@@ -41,14 +41,14 @@ export const buttons = [
   {
     id: 5,
     title: "Collaboration Ready",
-    description: "Design and deploy AI workflows with a simple, visual canvas.",
+    description: "Share and manage access with your team effortlessly.",
     icon: Users,
     icon_color: "#FFCC00",
   },
   {
     id: 6,
     title: "Easy Deploy",
-    description: "Move from concept to execution in minutes. ",
+    description: "Move from concept to production-level execution in minutes. ",
     icon: Plane,
     icon_color: "#00C7BE",
   },

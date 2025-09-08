@@ -44,6 +44,7 @@ function HeroSection() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
+      id="hero"
     >
       <div className="w-full">
         <motion.div className="max-w-4xl" variants={fadeUp}>

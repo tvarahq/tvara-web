@@ -17,7 +17,7 @@ function CallToActionSection() {
         </h1>
 
         <p className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed">
-          Join thousands of teams already building the future with AI-powered
+          Join thousands of teams already signed up to build the future with AI-powered
           automation.
         </p>
 

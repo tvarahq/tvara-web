@@ -44,12 +44,14 @@ function Installation() {
       </div>
       
       <p className="text-gray-300 text-lg mt-12">
-        Watch this{' '}
+        Checkout{' '}
         <a 
-          href="#" 
+          href="https://github.com/tvarahq/tvara" 
           className="text-white underline hover:text-primary transition-colors duration-200"
+          target="_blank" 
+          rel="noopener noreferrer"
         >
-          Demo Video
+          The Official Repository
         </a>
         {' '}to learn more about Tvara
       </p>

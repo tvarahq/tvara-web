@@ -25,7 +25,7 @@ const IntegratedToolsSection = () => {
             style={{ scale, opacity }}
             className="sticky top-0 h-screen w-full bg-transparent pl-4 md:pl-24 lg:pl-18 z-10"
         >
-            <div className="flex flex-col lg:flex-row min-h-screen relative">
+            <div className="flex items-center lg:flex-row min-h-screen relative">
                 <div className="flex-1 flex justify-center px-6">
                     <div className="max-w-2xl text-center lg:text-left">
                         <div className="mb-6">
@@ -46,7 +46,7 @@ const IntegratedToolsSection = () => {
 
                         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                             <button
-                                onClick={() => console.log("clicked")}
+                                onClick={() => navigate('/integrations')}
                                 className="w-full sm:w-auto px-4 py-2.5 sm:px-3.5 sm:py-2 bg-primary/80 text-white font-bold rounded-[10px] hover:bg-primary/60 transition cursor-pointer text-sm sm:text-base relative group"
                             >
                                 <span className="relative z-10 flex items-center justify-center gap-2">
