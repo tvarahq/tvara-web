@@ -7,6 +7,8 @@ import {
   Database,
 } from "lucide-react";
 
+const _MOTION_REF = motion;
+
 const SDKSection = () => {
   const targetRef = useRef(null);
 
@@ -91,10 +93,10 @@ print(response)
     <motion.section
       ref={targetRef}
       style={{ y, opacity }}
-      className="py-20 px-6 relative overflow-hidden"
+      className="py-12 sm:py-16 md:py-20 px-4 sm:px-6 relative overflow-hidden"
     >
       {/* Background decorative elements */}
-      <div className="absolute inset-0 opacity-10">
+      <div className="absolute inset-0 opacity-10 hidden sm:block">
         <div className="absolute top-20 left-10 w-32 h-32 bg-cyan-400 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 right-10 w-40 h-40 bg-cyan-300 rounded-full blur-3xl"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-cyan-200 rounded-full blur-3xl"></div>
@@ -110,7 +112,7 @@ print(response)
         <motion.div variants={itemVariants} className="text-center mb-16">
           <motion.h2
             variants={itemVariants}
-            className="text-5xl font-bold text-white mb-6 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight"
           >
             Beyond No-Code:
             <br />
@@ -121,7 +123,7 @@ print(response)
 
           <motion.p
             variants={itemVariants}
-            className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
             While our no-code platform gets you started quickly, our
             comprehensive SDK gives you
@@ -136,11 +138,11 @@ print(response)
 
         <motion.div
           variants={itemVariants}
-          className="grid lg:grid-cols-2 gap-12 mb-16 items-center"
+          className="grid lg:grid-cols-2 gap-6 md:gap-10 lg:gap-12 mb-16 items-center"
         >
           {/* Left side - Code example */}
           <motion.div variants={itemVariants} className="space-y-6">
-            <div className="bg-gray-900/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-cyan-400/20">
+            <div className="bg-gray-900/80 backdrop-blur-sm rounded-2xl p-4 sm:p-6 md:p-8 shadow-xl border border-cyan-400/20 overflow-x-auto">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-3 h-3 bg-red-400 rounded-full"></div>
                 <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
@@ -157,7 +159,7 @@ print(response)
                 </button>
               </div>
 
-              <div className="font-mono text-sm space-y-2 text-left">
+              <div className="font-mono text-xs sm:text-sm space-y-2 text-left min-w-max">
                 <div>
                   <span className="text-cyan-400">from</span>{" "}
                   <span className="text-white">tvara.core</span>{" "}
@@ -212,7 +214,7 @@ print(response)
 
           {/* Right side - Benefits */}
           <motion.div variants={itemVariants} className="space-y-6">
-            <h3 className="text-3xl font-bold text-white mb-8 text-center">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-8 text-center">
               Create Whatever You Imagine
             </h3>
 
@@ -225,7 +227,7 @@ print(response)
                   scale: 1.02,
                   transition: { duration: 0.2 },
                 }}
-                className="bg-gray-900/60 backdrop-blur-sm rounded-xl p-6 border border-cyan-400/20 hover:shadow-lg hover:border-cyan-400/40 transition-all cursor-pointer"
+                className="bg-gray-900/60 backdrop-blur-sm rounded-xl p-4 sm:p-5 md:p-6 border border-cyan-400/20 hover:shadow-lg hover:border-cyan-400/40 transition-all cursor-pointer"
               >
                 <div className="flex items-start gap-4">
                   <div className="p-2 bg-cyan-400/20 rounded-lg text-cyan-400 flex-shrink-0">
@@ -251,7 +253,7 @@ print(response)
                       scale: 1.02,
                       transition: { duration: 0.2 },
                     }}
-                    className="flex-1 bg-gray-900/60 backdrop-blur-sm rounded-xl p-6 border border-cyan-400/20 hover:shadow-lg hover:border-cyan-400/40 transition-all cursor-pointer"
+                    className="flex-1 bg-gray-900/60 backdrop-blur-sm rounded-xl p-4 sm:p-5 md:p-6 border border-cyan-400/20 hover:shadow-lg hover:border-cyan-400/40 transition-all cursor-pointer"
                   >
                     <div className="flex items-start gap-4">
                       <div className="p-2 bg-cyan-400/20 rounded-lg text-cyan-400 flex-shrink-0">

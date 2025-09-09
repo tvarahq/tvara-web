@@ -171,7 +171,7 @@ function SideBar({ selectedAnchor, onAnchorSelect }) {
   };
 
   return (
-    <div className="text-white border-r-[0.5px] border-gray-700 w-72 bg-black h-screen overflow-y-auto select-none custom-scrollbar">
+    <div className="text-white border-r-[0.5px] border-gray-700 w-[85vw] max-w-xs md:w-72 bg-black h-screen md:h-[calc(100vh-0px)] overflow-y-auto select-none custom-scrollbar">
 
       <ul className="space-y-2 text-md p-4">
         {sidebarData.map((parentNode) => (

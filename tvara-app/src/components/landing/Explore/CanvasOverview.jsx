@@ -116,22 +116,21 @@
 
 import React, { useState } from 'react'
 import Canvas from './Canvas';
-import { 
-  DragDropCanvas,
-  EventWorkflowCanvas, 
-  CredentialVaultCanvas,
-  TeamCollaborationCanvas,
-  DeploymentCanvas
-} from './Test';
+import DragDropCanvas from './DragDropCanvas';
+import EventWorkflowCanvas from './EventWorkflowCanvas';
+import CredentialVaultCanvas from './CredentialVaultCanvas';
+import TeamCollaborationCanvas from './TeamCollaborationCanvas';
+import DeploymentCanvas from './DeploymentCanvas';
+import { LayoutTemplate, Hand, Activity, Key as KeyIcon, Users, Rocket } from 'lucide-react';
 
 // Mock buttons data since it's imported from utils
 const buttons = [
-  { id: 1, title: 'Visual Flow Builder', description: 'Drag-and-drop workflow designer', icon_color: '#3b82f6' },
-  { id: 2, title: 'Drag & Drop Interface', description: 'Interactive drag and drop components', icon_color: '#8b5cf6' },
-  { id: 3, title: 'Event-Driven Workflows', description: 'Event trigger configurations', icon_color: '#ef4444' },
-  { id: 4, title: 'Credential Management', description: 'Security vault interface', icon_color: '#10b981' },
-  { id: 5, title: 'Team Collaboration', description: 'Collaboration tools and team management', icon_color: '#f59e0b' },
-  { id: 6, title: 'One-Click Deployment', description: 'Deployment dashboard and controls', icon_color: '#06b6d4' }
+  { id: 1, title: 'Visual Flow Builder', description: 'Drag-and-drop workflow designer', icon_color: '#3b82f6', Icon: LayoutTemplate },
+  { id: 2, title: 'Drag & Drop Interface', description: 'Interactive drag and drop components', icon_color: '#8b5cf6', Icon: Hand },
+  { id: 3, title: 'Event-Driven Workflows', description: 'Event trigger configurations', icon_color: '#ef4444', Icon: Activity },
+  { id: 4, title: 'Credential Management', description: 'Security vault interface', icon_color: '#10b981', Icon: KeyIcon },
+  { id: 5, title: 'Team Collaboration', description: 'Collaboration tools and team management', icon_color: '#f59e0b', Icon: Users },
+  { id: 6, title: 'One-Click Deployment', description: 'Deployment dashboard and controls', icon_color: '#06b6d4', Icon: Rocket }
 ];
 
 export default function CanvasOverview() {
@@ -180,10 +179,7 @@ export default function CanvasOverview() {
                   }`}
                 style={{ backgroundColor: `${button.icon_color}20`, border: `2px solid ${button.icon_color}` }}
               >
-                <div 
-                  className="w-6 h-6 rounded" 
-                  style={{ backgroundColor: button.icon_color }}
-                ></div>
+                {button.Icon && <button.Icon size={22} style={{ color: button.icon_color }} />}
               </div>
               <div className='min-w-0 flex-1'>
                 <h3 className={`text-[17px] font-bold leading-6 transition-colors duration-300 ${activeTab === button.id ? 'text-white' : 'text-gray-300'
@@ -203,9 +199,9 @@ export default function CanvasOverview() {
         </div>
 
         {/* Tab Content Area */}
-        <div className='bg-white w-[75%] h-full rounded-[10px] overflow-hidden border-2 border-gray-800 shadow-sm shadow-[#373d3d] relative'>
+        <div className='w-[75%] h-full rounded-[10px] overflow-hidden border border-gray-700 shadow-xl shadow-[#0031343c] relative bg-gray-900/80 backdrop-blur-sm'>
           {/* Tab Content */}
-          <div className='w-full h-full bg-[#000]'>
+          <div className='w-full h-full bg-[#0f181f]'>
             {renderTabContent()}
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { motion, useTransform, useScroll } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { Users, Github, Zap } from "lucide-react";
 import WorkFlowCards from "./WorkFlowCards";
 // WorkFlowCards component with text focus
