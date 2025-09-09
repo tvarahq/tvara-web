@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import navbar_logo from "../../assets/navbar_logo.svg";
 import { Link } from "react-router-dom";
 import slack from "../../assets/slack.svg";
 import github from "../../assets/github.svg";
+import navbar_logo from "../../assets/navbar_logo.svg";
 
-function NavBar() {
+function ExtendedNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -13,23 +13,22 @@ function NavBar() {
 
   return (
     <>
-      {/* Main Navigation */}
-      <nav className="relative translate-y-10 flex items-center justify-between text-white rounded-[20px] px-4 md:px-9 py-3 font-sans z-50">
-        <div className="absolute opacity-60 inset-0 bg-[#222020] backdrop-blur-sm rounded-[20px] border-[1px] border-[#5e5656]/30"></div>
+      <nav className="sticky top-0 w-full h-12 flex items-center justify-between text-white px-6 py-8 md:px-12 font-sans z-50">
+        <div className="absolute inset-0 py-8 bg-background backdrop-blur-sm border-b-[0.5px] border-gray-700"></div>
 
         <div className="relative z-10 w-full flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/">
-            <img
-              src={navbar_logo}
-              alt="Logo"
-              className="h-6 md:h-8 cursor-pointer"
-            />
-          </Link>
+          <div>
+            <Link to="/">
+              <img
+                src={navbar_logo}
+                alt="Logo"
+                className="h-8 md:h-10 cursor-pointer"
+              />
+            </Link>
+          </div>
 
-          {/* Desktop Navigation Links */}
           <div className="hidden md:block">
-            <div className="flex gap-20">
+            <div className="flex gap-8 lg:gap-16 text-lg font-medium">
               <Link to="/" className="hover:text-gray-300 transition">
                 Home
               </Link>
@@ -42,18 +41,16 @@ function NavBar() {
             </div>
           </div>
 
-          {/* Desktop Action Buttons */}
-          <div className="hidden md:flex gap-4">
+          <div className="hidden md:flex gap-2 lg:gap-4">
             <a
               href="https://github.com/tvarahq/tvara"
               target="_blank"
               rel="noreferrer"
             >
-              <button className="flex items-center gap-2.5 px-3.5 py-2 cursor-pointer border border-white rounded-[10px] h-8 font-bold text-sm">
-                {github && (
-                  <img src={github} alt="GitHub Logo" className="h-4" />
-                )}
-                <span>GitHub</span>
+              <button className="flex items-center gap-2 px-3 lg:px-4 py-2 border border-white rounded-[10px] font-bold text-xs lg:text-sm h-8 cursor-pointer">
+                <img src={github} alt="GitHub" className="h-4" />
+                <span className="hidden lg:inline">GitHub</span>
+                <span className="lg:hidden">GH</span>
               </button>
             </a>
             <a
@@ -61,14 +58,14 @@ function NavBar() {
               target="_blank"
               rel="noreferrer"
             >
-              <button className="flex items-center gap-2.5 px-3.5 py-2 cursor-pointer rounded-[10px] h-8 font-bold bg-primary/80 hover:bg-primary/60 transition text-sm">
-                {slack && <img src={slack} alt="Slack Logo" className="h-4" />}
-                <span>Join Slack</span>
+              <button className="flex items-center gap-2 px-3 lg:px-4 py-2 rounded-[10px] font-bold bg-primary/80 hover:bg-primary/60 transition text-xs lg:text-sm h-8 cursor-pointer">
+                <img src={slack} alt="Slack" className="h-4" />
+                <span className="hidden lg:inline">Join Slack</span>
+                <span className="lg:hidden">Slack</span>
               </button>
             </a>
           </div>
 
-          {/* Mobile Menu Toggle */}
           <button
             className="md:hidden flex flex-col justify-center items-center w-6 h-6 cursor-pointer"
             onClick={toggleMobileMenu}
@@ -93,46 +90,45 @@ function NavBar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
+      {/* MOBILE */}
+
       <div
-        className={`fixed inset-0 bg-black/50 mt-3 backdrop-blur-sm z-40 transition-opacity duration-300 md:hidden ${
+        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-300 md:hidden ${
           isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       >
         <div
-          className={`fixed top-20 left-1/2 transform -translate-x-1/2 w-[95%] bg-[#222020] rounded-[20px] border border-[#5e5656]/30 transition-all duration-300 ${
+          className={`fixed top-[100px] left-0 w-full bg-[#222020] border-t border-[#5e5656]/30 transition-all duration-300 ${
             isMobileMenuOpen
               ? "translate-y-0 opacity-100"
               : "-translate-y-4 opacity-0"
           }`}
         >
           <div className="p-6 space-y-6">
-            {/* Mobile Navigation Links */}
             <div className="space-y-4">
               <Link
                 to="/"
-                className="block text-white hover:text-gray-300 transition text-lg py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
+                className="block text-white hover:text-gray-300 text-lg"
               >
                 Home
               </Link>
               <Link
                 to="/blog"
-                className="block text-white hover:text-gray-300 transition text-lg py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
+                className="block text-white hover:text-gray-300 text-lg"
               >
                 Blog
               </Link>
               <Link
                 to="/docs"
-                className="block text-white hover:text-gray-300 transition text-lg py-2"
                 onClick={() => setIsMobileMenuOpen(false)}
+                className="block text-white hover:text-gray-300 text-lg"
               >
                 Docs
               </Link>
             </div>
 
-            {/* Mobile Action Buttons */}
             <div className="space-y-3 pt-4 border-t border-[#5e5656]/30 flex flex-col gap-1">
               <a
                 href="https://github.com/tvarahq/tvara"
@@ -140,10 +136,8 @@ function NavBar() {
                 rel="noreferrer"
               >
                 <button className="w-full flex items-center justify-center gap-2.5 px-4 py-3 border border-white rounded-[10px] font-bold text-white hover:bg-white/10 transition">
-                  {github && (
-                    <img src={github} alt="GitHub Logo" className="h-4" />
-                  )}
-                  <span>GitHub</span>
+                  <img src={github} alt="GitHub" className="h-4" />
+                  GitHub
                 </button>
               </a>
               <a
@@ -152,10 +146,8 @@ function NavBar() {
                 rel="noreferrer"
               >
                 <button className="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-[10px] font-bold bg-primary/80 hover:bg-primary/60 transition text-white">
-                  {slack && (
-                    <img src={slack} alt="Slack Logo" className="h-4" />
-                  )}
-                  <span>Join Slack</span>
+                  <img src={slack} alt="Slack" className="h-4" />
+                  Join Slack
                 </button>
               </a>
             </div>
@@ -166,4 +158,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default ExtendedNavbar;
