@@ -25,7 +25,7 @@ const IntegratedToolsSection = () => {
             style={{ scale, opacity }}
             className="sticky top-0 h-screen w-full bg-transparent pl-4 md:pl-24 lg:pl-18 z-10"
         >
-            <div className="flex items-center lg:flex-row min-h-screen relative">
+            <div className="flex flex-col items-center lg:flex-row min-h-screen relative">
                 <div className="flex-1 flex justify-center px-6">
                     <div className="max-w-2xl text-center lg:text-left">
                         <div className="mb-6">

@@ -42,16 +42,28 @@ function ExtendedNavbar() {
           </div>
 
           <div className="hidden md:flex gap-2 lg:gap-4">
-            <button className="flex items-center gap-2 px-3 lg:px-4 py-2 border border-white rounded-[10px] font-bold text-xs lg:text-sm h-8">
-              <img src={github} alt="GitHub" className="h-4" />
-              <span className="hidden lg:inline">GitHub</span>
-              <span className="lg:hidden">GH</span>
-            </button>
-            <button className="flex items-center gap-2 px-3 lg:px-4 py-2 rounded-[10px] font-bold bg-primary/80 hover:bg-primary/60 transition text-xs lg:text-sm h-8">
-              <img src={slack} alt="Slack" className="h-4" />
-              <span className="hidden lg:inline">Join Slack</span>
-              <span className="lg:hidden">Slack</span>
-            </button>
+            <a
+              href="https://github.com/tvarahq/tvara"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <button className="flex items-center gap-2 px-3 lg:px-4 py-2 border border-white rounded-[10px] font-bold text-xs lg:text-sm h-8 cursor-pointer">
+                <img src={github} alt="GitHub" className="h-4" />
+                <span className="hidden lg:inline">GitHub</span>
+                <span className="lg:hidden">GH</span>
+              </button>
+            </a>
+            <a
+              href="https://tvara-workspace.slack.com/archives/C099B0WMYKZ"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <button className="flex items-center gap-2 px-3 lg:px-4 py-2 rounded-[10px] font-bold bg-primary/80 hover:bg-primary/60 transition text-xs lg:text-sm h-8 cursor-pointer">
+                <img src={slack} alt="Slack" className="h-4" />
+                <span className="hidden lg:inline">Join Slack</span>
+                <span className="lg:hidden">Slack</span>
+              </button>
+            </a>
           </div>
 
           <button
@@ -117,15 +129,27 @@ function ExtendedNavbar() {
               </Link>
             </div>
 
-            <div className="space-y-3 pt-4 border-t border-[#5e5656]/30">
-              <button className="w-full flex items-center justify-center gap-2.5 px-4 py-3 border border-white rounded-[10px] font-bold text-white hover:bg-white/10 transition">
-                <img src={github} alt="GitHub" className="h-4" />
-                GitHub
-              </button>
-              <button className="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-[10px] font-bold bg-primary/80 hover:bg-primary/60 transition text-white">
-                <img src={slack} alt="Slack" className="h-4" />
-                Join Slack
-              </button>
+            <div className="space-y-3 pt-4 border-t border-[#5e5656]/30 flex flex-col gap-1">
+              <a
+                href="https://github.com/tvarahq/tvara"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <button className="w-full flex items-center justify-center gap-2.5 px-4 py-3 border border-white rounded-[10px] font-bold text-white hover:bg-white/10 transition">
+                  <img src={github} alt="GitHub" className="h-4" />
+                  GitHub
+                </button>
+              </a>
+              <a
+                href="https://tvara-workspace.slack.com/archives/C099B0WMYKZ"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <button className="w-full flex items-center justify-center gap-2.5 px-4 py-3 rounded-[10px] font-bold bg-primary/80 hover:bg-primary/60 transition text-white">
+                  <img src={slack} alt="Slack" className="h-4" />
+                  Join Slack
+                </button>
+              </a>
             </div>
           </div>
         </div>
