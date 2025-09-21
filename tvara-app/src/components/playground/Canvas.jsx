@@ -1,27 +1,91 @@
-import React from 'react'
-import { ReactFlow, Background, Controls, applyEdgeChanges, applyNodeChanges, addEdge, Handle } from '@xyflow/react';
+import { ReactFlow, Background, Controls, applyEdgeChanges, applyNodeChanges, addEdge, MiniMap } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import { useState, useCallback } from 'react';
+import AgentNode from './nodes/AgentNode';
+import React from 'react';
 
-export default function Canvas() {
-    return (
-        <div className='w-full h-full'>
-            <ReactFlow
+const nodeTypes = {
+  agentNode: AgentNode,
+  default: AgentNode,
+};
 
-                style={{ backgroundColor: '#0f181f' }}
-                fitView
-                fitViewOptions={{
-                    padding: 0.2,
-                    minZoom: 0.5,
-                    maxZoom: 1.2
-                }}
-                defaultViewport={{ x: 0, y: 0, zoom: 0.8 }}
-                minZoom={0.3}
-                maxZoom={2}
-                zoomOnScroll={false}
-                panOnScroll={false}
-            >
-                <Background variant="dots" color="#fff" gap={20} size={1} />
-            </ReactFlow>
-        </div>
-    )
+export default function Canvas({ onAddNode, onDeleteSelectedNodes }) {
+  const [nodes, setNodes] = useState([]);
+  const [edges, setEdges] = useState([]);
+  const [selectedNodes, setSelectedNodes] = useState([]);
+
+  const onNodesChange = useCallback(
+    (changes) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
+    [],
+  );
+  
+  const onEdgesChange = useCallback(
+    (changes) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
+    [],
+  );
+
+  const onConnect = useCallback(
+    (params) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
+    [],
+  );
+
+  // Function to add node - called from external components via global reference
+  const addNode = (nodeData = null) => {
+    const newNode = {
+      id: `node-${Date.now()}`,
+      position: { x: Math.random() * 400, y: Math.random() * 400 },
+      data: nodeData || { label: `Node ${nodes.length + 1}` },
+      type: 'agentNode',
+    };
+    setNodes((nds) => [...nds, newNode]);
+    onAddNode?.(newNode); // Notify parent component
+  };
+
+  // Function to delete selected nodes
+  const deleteSelectedNodes = () => {
+    setNodes((nds) =>
+      nds.filter((n) => !selectedNodes.some((sel) => sel.id === n.id))
+    );
+
+    setEdges((eds) =>
+      eds.filter(
+        (e) =>
+          !selectedNodes.some(
+            (sel) => sel.id === e.source || sel.id === e.target
+          )
+      )
+    );
+    onDeleteSelectedNodes?.(selectedNodes); // Notify parent component
+  };
+
+  // Expose functions to external components via global references
+  React.useEffect(() => {
+    window.canvasAddNode = addNode;
+    window.canvasDeleteSelectedNodes = deleteSelectedNodes;
+    return () => {
+      delete window.canvasAddNode;
+      delete window.canvasDeleteSelectedNodes;
+    };
+  }, [nodes.length]); // Re-run when nodes change to update the closure
+
+  return (
+    <div className='w-full h-full'>
+      <ReactFlow
+        nodes={nodes}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        onConnect={onConnect}
+        nodeTypes={nodeTypes}
+        // colorMode='dark'
+        style={{ backgroundColor: '#0f181f' }}
+        fitView
+        onSelectionChange={({ nodes }) => setSelectedNodes(nodes)}
+      >
+        <Background variant="dots" color="#fff" gap={20} size={1} />
+        <Controls />
+        <MiniMap style={{ backgroundColor: "#242424" }} />
+      </ReactFlow>
+    </div>
+  );
 }
