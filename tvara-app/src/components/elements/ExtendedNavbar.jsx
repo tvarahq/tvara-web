@@ -38,6 +38,9 @@ function ExtendedNavbar() {
               <Link to="/docs" className="hover:text-gray-300 transition">
                 Docs
               </Link>
+              <Link to="/chat" className="hover:text-gray-300 transition">
+                Chat
+              </Link>
             </div>
           </div>
 
