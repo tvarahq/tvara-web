@@ -7,6 +7,8 @@
   --color-primary: #39D0E8;
   --color-background: #000000;
   --color-navbar: #222020;
+  --color-canvas-bg: #0F181F;
+  --color-canvas-text: #FCF8F8;
 
   --font-sans: 'Roboto', ui-sans-serif, system-ui;
 }
