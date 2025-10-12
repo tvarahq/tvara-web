@@ -85,7 +85,7 @@ function Chat() {
           {/* Loading State */}
           {isLoading && (
             <div className='mt-8'>
-              <AILoader message="Analyzing your request and generating workflow..." />
+              <AILoader />
             </div>
           )}
 

@@ -1,6 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const AILoader = ({ message = "Generating workflow..." }) => {
+const AILoader = () => {
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  
+  const loadingPhrases = [
+    "Building the workspace for you...",
+    "Crafting your perfect workflow...",
+    "Assembling the magic behind the scenes...",
+    "Weaving together your automation dreams...",
+    "Engineering your digital symphony...",
+    "Orchestrating the perfect solution...",
+    "Casting spells in the code realm...",
+    "Architecting your workflow masterpiece...",
+    "Brewing the perfect automation potion...",
+    "Sculpting your digital workflow...",
+    "Conducting the automation orchestra...",
+    "Painting your workflow canvas...",
+    "Choreographing your process dance...",
+    "Composing your automation symphony...",
+    "Forging your digital toolkit..."
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPhraseIndex((prevIndex) => 
+        (prevIndex + 1) % loadingPhrases.length
+      );
+    }, 4000); // Change phrase every 2 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center space-y-4 p-8">
       {/* Animated dots */}
@@ -12,17 +42,14 @@ const AILoader = ({ message = "Generating workflow..." }) => {
       
       {/* Loading text with typing animation */}
       <div className="text-center">
-        <p className="text-gray-600 text-sm font-medium">{message}</p>
-        <div className="flex items-center justify-center mt-2">
+        <p className="text-gray-300 text-sm font-medium transition-all duration-500 ease-in-out">
+          {loadingPhrases[currentPhraseIndex]}
+        </p>
+        {/* <div className="flex items-center justify-center mt-2">
           <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
           <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse ml-1" style={{ animationDelay: '200ms' }}></div>
           <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse ml-1" style={{ animationDelay: '400ms' }}></div>
-        </div>
-      </div>
-      
-      {/* Progress bar */}
-      <div className="w-64 bg-gray-200 rounded-full h-1.5 overflow-hidden">
-        <div className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-pulse"></div>
+        </div> */}
       </div>
     </div>
   );
