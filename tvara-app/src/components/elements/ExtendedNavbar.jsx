@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import slack from "../../assets/slack.svg";
 import github from "../../assets/github.svg";
 import navbar_logo from "../../assets/navbar_logo.svg";
 
@@ -38,6 +37,9 @@ function ExtendedNavbar() {
               <Link to="/docs" className="hover:text-gray-300 transition">
                 Docs
               </Link>
+              <Link to="/chat" className="hover:text-gray-300 transition">
+                Chat
+              </Link>
             </div>
           </div>
 
@@ -53,7 +55,7 @@ function ExtendedNavbar() {
                 <span className="lg:hidden">GH</span>
               </button>
             </a>
-            <a
+            {/* <a
               href="https://tvara-workspace.slack.com/archives/C099B0WMYKZ"
               target="_blank"
               rel="noreferrer"
@@ -63,7 +65,7 @@ function ExtendedNavbar() {
                 <span className="hidden lg:inline">Join Slack</span>
                 <span className="lg:hidden">Slack</span>
               </button>
-            </a>
+            </a> */}
           </div>
 
           <button
@@ -140,7 +142,7 @@ function ExtendedNavbar() {
                   GitHub
                 </button>
               </a>
-              <a
+              {/* <a
                 href="https://tvara-workspace.slack.com/archives/C099B0WMYKZ"
                 target="_blank"
                 rel="noreferrer"
@@ -149,7 +151,7 @@ function ExtendedNavbar() {
                   <img src={slack} alt="Slack" className="h-4" />
                   Join Slack
                 </button>
-              </a>
+              </a> */}
             </div>
           </div>
         </div>
