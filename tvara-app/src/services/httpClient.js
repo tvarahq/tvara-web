@@ -46,6 +46,16 @@ export const api = {
     } catch (error) {
       throw new Error(error.response?.data?.message || 'Failed to generate workflow');
     }
+  },
+
+  // Workflow visualization endpoint
+  visualizeWorkflow: async () => {
+    try {
+      const response = await httpClient.get('/workflow/visualize');
+      return response.data;
+    } catch (error) {
+      throw new Error(error.response?.data?.message || 'Failed to fetch workflow visualization');
+    }
   }
 };
 
