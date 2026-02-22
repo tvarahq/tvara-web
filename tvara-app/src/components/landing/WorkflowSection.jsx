@@ -50,7 +50,7 @@ export default function WorkflowSection() {
           transition={{ duration: 0.45, delay: 0.08 }}
         >
           One message.{' '}
-          <span className="text-gray-400">Four actions. Zero tabs.</span>
+          <span className="text-gray-400">Many actions. Zero tabs.</span>
         </motion.h2>
         <motion.p
           className="text-sm text-gray-500 font-medium mt-4 max-w-md mx-auto leading-relaxed"
@@ -60,7 +60,7 @@ export default function WorkflowSection() {
           transition={{ duration: 0.4, delay: 0.16 }}
         >
           Tvara chains actions across your stack. A single text does the
-          work of four open tabs.
+          work of multiple open tabs.
         </motion.p>
       </div>
 
