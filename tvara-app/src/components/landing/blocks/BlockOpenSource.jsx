@@ -20,7 +20,7 @@ export default function BlockOpenSource() {
         enterprise-grade reliability, auditability, and security you can inspect yourself.
       </p>
       <a
-        href="https://github.com/tvarahq"
+        href="https://github.com/tvarahq/tvara"
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-700 hover:text-black transition-colors mt-auto"
