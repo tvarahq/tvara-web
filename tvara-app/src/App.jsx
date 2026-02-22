@@ -1,8 +1,23 @@
+import { Routes, Route } from 'react-router-dom'
 import LandingPage from './pages/LandingPage'
-import './App.css'
+import LoginPage from './pages/LoginPage'
+import DashboardPage from './pages/DashboardPage'
+import ResetPasswordPage from './pages/ResetPasswordPage'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
-  return <LandingPage />
+  return (
+    <Routes>
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
+      <Route path="/dashboard" element={
+        <ProtectedRoute>
+          <DashboardPage />
+        </ProtectedRoute>
+      } />
+    </Routes>
+  )
 }
 
 export default App
