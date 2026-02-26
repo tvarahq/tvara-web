@@ -1,12 +1,15 @@
+import { useState } from 'react'
+import { AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import tvaraFullLogo from '../assets/tvara_full_logo.png'
+import Sidebar from '../components/dashboard/Sidebar'
+import ActivityPage from '../components/dashboard/ActivityPage'
+import ConnectionsPage from '../components/dashboard/ConnectionsPage'
+import ApiKeysPage from '../components/dashboard/ApiKeysPage'
 
 export default function DashboardPage() {
-  const { user, signOut } = useAuth()
-  const displayName = user?.is_anonymous
-    ? 'Guest'
-    : user?.user_metadata?.full_name ?? user?.user_metadata?.name ?? user?.email
+  const [activeTab, setActiveTab] = useState('activity')
+  const { signOut } = useAuth()
   const navigate = useNavigate()
 
   async function handleSignOut() {
@@ -15,20 +18,20 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center gap-4">
-      <img src={tvaraFullLogo} alt="Tvara" className="h-10 w-auto" />
-      <p className="text-sm text-gray-500 font-medium flex flex-col items-center">
-        Signed in as{' '}
-        <span className="text-gray-900 font-semibold">{displayName}</span>
-        <br />
-        <span>We will be launching soon! 🚀</span>
-      </p>
-      <button
-        onClick={handleSignOut}
-        className="px-4 py-2 rounded-lg border border-gray-300 text-sm font-semibold text-gray-700 hover:bg-white transition-colors duration-150 cursor-pointer"
-      >
-        Sign out
-      </button>
+    <div className="flex h-screen bg-white overflow-hidden">
+      <Sidebar
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        onSignOut={handleSignOut}
+      />
+
+      <main className="flex-1 overflow-y-auto">
+        <AnimatePresence mode="wait">
+          {activeTab === 'activity'    && <ActivityPage    key="activity" />}
+          {activeTab === 'connections' && <ConnectionsPage key="connections" />}
+          {activeTab === 'api-keys'    && <ApiKeysPage     key="api-keys" />}
+        </AnimatePresence>
+      </main>
     </div>
   )
 }

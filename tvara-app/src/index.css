@@ -2,6 +2,15 @@
 
 @theme {
   --font-sans: 'Montserrat', sans-serif;
+
+  /* ─── Tvara brand teal ────────────────────────────────────────────────────
+     Sampled from the logo gradient (#6BC4D4 → #2B7A94).
+     Change only these four tokens to retheme the entire dashboard.
+  ──────────────────────────────────────────────────────────────────────── */
+  --color-brand:        #3399B4;   /* primary — main teal */
+  --color-brand-dark:   #1D7A93;   /* dark    — text, active icons */
+  --color-brand-mid:    #A8D8E8;   /* mid     — hover borders */
+  --color-brand-light:  #E8F5FA;   /* light   — active-nav bg, row tints */
 }
 
 * {
