@@ -108,17 +108,10 @@ function IntegrationCard({ integration, connection, onConnect, onDisconnect }) {
           {/* Description */}
           <p className="text-xs text-gray-400 mb-3 leading-relaxed">{meta.description}</p>
 
-          {/* Capabilities chips */}
-          <div className="flex items-center flex-wrap gap-1.5 mb-3">
-            {meta.capabilities?.map(cap => (
-              <span
-                key={cap}
-                className="text-[10px] font-medium px-2 py-0.5 rounded-lg border border-gray-100 text-gray-500 bg-gray-50"
-              >
-                {cap}
-              </span>
-            ))}
-          </div>
+          {/* Capabilities */}
+          <p className="text-[10px] text-gray-400 mb-3">
+            {meta.capabilities?.join('  ·  ')}
+          </p>
 
           {/* Connection metadata (active only) */}
           {isConnected && connection && (
@@ -254,7 +247,7 @@ export default function ConnectionsPage() {
       {/* Header */}
       <div className="flex items-start justify-between mb-8">
         <div>
-          <h1 className="text-xl font-bold text-gray-900">Connections</h1>
+          <h1 className="text-xl font-bold text-gray-900">Integrations</h1>
           <p className="text-sm text-gray-400 mt-0.5">Manage your connected apps and credentials.</p>
         </div>
         {!error && (

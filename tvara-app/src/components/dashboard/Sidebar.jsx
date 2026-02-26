@@ -5,7 +5,7 @@ import tvaraLogo from '../../assets/tvara_logo.png'
 
 const navItems = [
   { id: 'activity', label: 'Activity', icon: Activity },
-  { id: 'connections', label: 'Connections', icon: Link2 },
+  { id: 'connections', label: 'Integrations', icon: Link2 },
   { id: 'api-keys', label: 'API Keys', icon: KeyRound },
 ]
 
