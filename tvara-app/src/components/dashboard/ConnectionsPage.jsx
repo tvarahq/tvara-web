@@ -115,7 +115,7 @@ function IntegrationCard({ integration, connection, onConnect, onDisconnect }) {
 
           {/* Connection metadata (active only) */}
           {isConnected && connection && (
-            <div className="flex items-center gap-4 pt-3 border-t border-gray-100">
+            <div className="flex flex-wrap items-center gap-4 pt-3 border-t border-gray-100">
               <div>
                 <p className="text-[10px] font-medium text-gray-400 uppercase tracking-wider mb-0.5">Account ID</p>
                 <code className="text-xs text-gray-600 font-mono bg-gray-50 border border-gray-100 px-2 py-0.5 rounded-lg">
@@ -178,7 +178,7 @@ function IntegrationCard({ integration, connection, onConnect, onDisconnect }) {
 
 function Skeleton() {
   return (
-    <div className="p-8 max-w-2xl animate-pulse space-y-4">
+    <div className="p-4 sm:p-8 max-w-2xl animate-pulse space-y-4">
       <div className="h-5 w-28 bg-gray-200 rounded mb-1" />
       <div className="h-3.5 w-52 bg-gray-100 rounded mb-8" />
       {[1, 2].map(i => (
@@ -242,10 +242,10 @@ export default function ConnectionsPage() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="p-8 max-w-2xl"
+      className="p-4 sm:p-8 max-w-2xl"
     >
       {/* Header */}
-      <div className="flex items-start justify-between mb-8">
+      <div className="flex items-start justify-between mb-6 sm:mb-8">
         <div>
           <h1 className="text-xl font-bold text-gray-900">Integrations</h1>
           <p className="text-sm text-gray-400 mt-0.5">Manage your connected apps and credentials.</p>

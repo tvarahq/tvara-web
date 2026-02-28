@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion'
-import { Activity, Link2, KeyRound, ExternalLink, LogOut, MessageSquare } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Activity, Link2, KeyRound, ExternalLink, LogOut, MessageSquare, Menu, X } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import tvaraLogo from '../../assets/tvara_logo.png'
 
@@ -7,11 +8,12 @@ const navItems = [
   { id: 'activity',    label: 'Activity',      icon: Activity },
   { id: 'playground',  label: 'Playground',    icon: MessageSquare },
   { id: 'integrations', label: 'Integrations', icon: Link2 },
-  { id: 'api-keys',    label: 'API Keys',      icon: KeyRound },
+  // { id: 'api-keys',    label: 'API Keys',      icon: KeyRound },
 ]
 
 export default function Sidebar({ activeTab, setActiveTab, onSignOut }) {
   const { user } = useAuth()
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   const displayName = user?.is_anonymous
     ? 'Guest'
@@ -28,8 +30,13 @@ export default function Sidebar({ activeTab, setActiveTab, onSignOut }) {
     ? 'Guest Workspace'
     : `${displayName.split(' ')[0]}'s Workspace`
 
-  return (
-    <aside className="w-56 h-screen flex flex-col border-r border-gray-200 bg-[#F7F7F7] flex-shrink-0">
+  function handleNavClick(id) {
+    setActiveTab(id)
+    setMobileOpen(false)
+  }
+
+  const SidebarContent = () => (
+    <>
       {/* Workspace switcher */}
       <div className="px-4 py-5 border-b border-gray-200">
         <div className="flex items-center gap-3">
@@ -52,7 +59,7 @@ export default function Sidebar({ activeTab, setActiveTab, onSignOut }) {
           return (
             <button
               key={id}
-              onClick={() => setActiveTab(id)}
+              onClick={() => handleNavClick(id)}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150 cursor-pointer ${
                 isActive
                   ? 'bg-brand-light text-brand-dark'
@@ -98,6 +105,68 @@ export default function Sidebar({ activeTab, setActiveTab, onSignOut }) {
           Sign out
         </button>
       </div>
-    </aside>
+    </>
+  )
+
+  return (
+    <>
+      {/* ── Desktop sidebar ── */}
+      <aside className="hidden md:flex w-56 h-screen flex-col border-r border-gray-200 bg-[#F7F7F7] flex-shrink-0">
+        <SidebarContent />
+      </aside>
+
+      {/* ── Mobile top bar ── */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4 py-3 bg-[#F7F7F7] border-b border-gray-200">
+        <div className="flex items-center gap-2.5">
+          <div className="w-7 h-7 rounded-full bg-gradient-to-br from-brand to-brand-dark flex items-center justify-center flex-shrink-0">
+            <span className="text-white text-[10px] font-bold">{initials || 'U'}</span>
+          </div>
+          <p className="text-xs font-semibold text-gray-900 truncate max-w-[140px]">{workspaceName}</p>
+        </div>
+        <button
+          onClick={() => setMobileOpen((v) => !v)}
+          className="p-1.5 rounded-lg text-gray-500 hover:bg-gray-200 transition-colors cursor-pointer"
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+        </button>
+      </div>
+
+      {/* ── Mobile drawer overlay ── */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <>
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+              className="md:hidden fixed inset-0 z-40 bg-black/30"
+              onClick={() => setMobileOpen(false)}
+            />
+            <motion.aside
+              key="drawer"
+              initial={{ x: '-100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+              className="md:hidden fixed top-0 left-0 h-full w-64 z-50 flex flex-col bg-[#F7F7F7] border-r border-gray-200 shadow-lg"
+            >
+              {/* Close button inside drawer */}
+              <div className="flex items-center justify-end px-4 pt-4 pb-2">
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-200 transition-colors cursor-pointer"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+              <SidebarContent />
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   )
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { TrendingUp, Zap } from 'lucide-react'
+import { Zap, Flame } from 'lucide-react'
 import { SiTelegram, SiSlack, SiNotion, SiGmail } from 'react-icons/si'
 import PulseChart from './PulseChart'
 import { supabase } from '../../utils/supabase'
@@ -64,13 +64,51 @@ function computeDailyData(runs, days = 30) {
 
 function computeStats(runs, days = 30) {
   const cutoff = Date.now() - days * 24 * 60 * 60 * 1000
-  const recentSuccessful = runs.filter(
-    (r) => r.status === 'success' && new Date(r.created_at).getTime() > cutoff
+  const periodRuns = runs.filter((r) => new Date(r.created_at).getTime() > cutoff)
+  const successful = periodRuns.filter((r) => r.status === 'success')
+
+  const total = successful.length
+  if (total === 0) return { total: null, successRate: null, avgDurationSec: null, streak: null }
+
+  const successRate = periodRuns.length > 0
+    ? Math.round((successful.length / periodRuns.length) * 100)
+    : null
+
+  // Avg duration from runs that have both timestamps
+  const durations = successful
+    .filter((r) => r.completed_at && r.created_at)
+    .map((r) => (new Date(r.completed_at).getTime() - new Date(r.created_at).getTime()) / 1000)
+  const avgDurationSec = durations.length > 0
+    ? Math.round(durations.reduce((a, b) => a + b, 0) / durations.length)
+    : null
+
+  // Streak: consecutive days (going backwards from today) with ≥1 success
+  const successDays = new Set(
+    successful.map((r) => new Date(r.created_at).toISOString().slice(0, 10))
   )
-  const total = recentSuccessful.length
-  if (total === 0) return { total: null, hoursSaved: null }
-  const hoursSaved = Math.round((total * 3) / 60 * 10) / 10
-  return { total, hoursSaved }
+  let streak = 0
+  const today = new Date()
+  for (let i = 0; i < 365; i++) {
+    const d = new Date(today)
+    d.setDate(today.getDate() - i)
+    const key = d.toISOString().slice(0, 10)
+    if (successDays.has(key)) {
+      streak++
+    } else if (i > 0) {
+      // Allow today to be empty without breaking the streak
+      break
+    }
+  }
+
+  return { total, successRate, avgDurationSec, streak }
+}
+
+function formatDuration(sec) {
+  if (sec == null) return '—'
+  if (sec < 60) return `${sec}s`
+  const m = Math.floor(sec / 60)
+  const s = sec % 60
+  return s > 0 ? `${m}m ${s}s` : `${m}m`
 }
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
@@ -100,8 +138,8 @@ function platformDisplayName(platform) {
 function SkeletonRow() {
   return (
     <tr className="border-b border-gray-50">
-      {[180, 260, 80, 80].map((w, i) => (
-        <td key={i} className="px-6 py-4">
+      {[120, 180, 60, 60].map((w, i) => (
+        <td key={i} className="px-3 sm:px-6 py-4">
           <div className="h-3 rounded bg-gray-100 animate-pulse" style={{ width: w }} />
         </td>
       ))}
@@ -112,6 +150,38 @@ function SkeletonRow() {
 function StatsSkeleton() {
   return (
     <div className="h-8 w-20 bg-gray-100 rounded animate-pulse" />
+  )
+}
+
+function MiniStatsSkeleton() {
+  return <div className="h-6 w-12 bg-gray-100 rounded animate-pulse" />
+}
+
+// ─── Metric card ─────────────────────────────────────────────────────────────
+
+function MetricCard({ label, value, sub, icon: Icon, iconColor, loading, note }) {
+  return (
+    <div className="bg-white rounded-2xl border border-gray-200 p-4 sm:p-5 flex flex-col gap-3">
+      <p className="text-sm font-semibold text-gray-800">{label}</p>
+      <div className="flex-1 flex items-end justify-between">
+        <div>
+          {loading ? (
+            <MiniStatsSkeleton />
+          ) : (
+            <p className="text-3xl font-bold text-gray-900 leading-none tracking-tight">
+              {value ?? '—'}
+            </p>
+          )}
+          {sub && <p className="text-xs text-gray-400 mt-1">{sub}</p>}
+        </div>
+        {Icon && (
+          <Icon size={18} style={iconColor ? { color: iconColor } : undefined} className={!iconColor ? 'text-gray-300' : ''} />
+        )}
+      </div>
+      {note && (
+        <p className="text-[11px] text-gray-400 leading-relaxed border-t border-gray-50 pt-2">{note}</p>
+      )}
+    </div>
   )
 }
 
@@ -146,7 +216,6 @@ export default function ActivityPage() {
       setError(null)
     } catch (err) {
       setError(err.message)
-      // Keep runs empty on error — component handles empty state gracefully
     } finally {
       setLoading(false)
     }
@@ -154,7 +223,7 @@ export default function ActivityPage() {
 
   useEffect(() => { fetchRuns() }, [fetchRuns])
 
-  const { total, hoursSaved } = computeStats(runs, period)
+  const { total, successRate, avgDurationSec, streak } = computeStats(runs, period)
   const dailyData = computeDailyData(runs, period)
 
   return (
@@ -163,19 +232,19 @@ export default function ActivityPage() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="p-8"
+      className="p-4 sm:p-8"
     >
       {/* Page header */}
-      <div className="mb-7">
+      <div className="mb-5 sm:mb-7">
         <h1 className="text-xl font-bold text-gray-900">Activity</h1>
         <p className="text-sm text-gray-400 mt-0.5">Your automation pulse, live.</p>
       </div>
 
-      {/* Bento grid */}
-      <div className="grid grid-cols-3 gap-4 max-w-5xl">
+      {/* Bento grid — 1 col on mobile, 3 cols on md+ */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl">
 
-        {/* Pulse card — spans 2 cols */}
-        <div className="col-span-2 bg-white rounded-2xl border border-gray-200 p-6">
+        {/* Pulse card — spans 2 cols on md+ */}
+        <div className="md:col-span-2 bg-white rounded-2xl border border-gray-200 p-4 sm:p-6">
           <div className="flex items-start justify-between mb-1">
             <div>
               <p className="text-sm font-semibold text-gray-800">Successful Automations</p>
@@ -204,37 +273,59 @@ export default function ActivityPage() {
           </div>
         </div>
 
-        {/* Time Saved card */}
-        <div className="col-span-1 bg-white rounded-2xl border border-gray-200 p-6 flex flex-col justify-between">
-          <div>
-            <p className="text-sm font-semibold text-gray-800">Time Saved</p>
-            <p className="text-xs text-gray-400 mt-0.5">Last {period} days</p>
-          </div>
-          <div>
-            {loading ? (
-              <StatsSkeleton />
-            ) : (
-              <>
-                <p className="text-5xl font-bold text-gray-900 leading-none tracking-tight">
-                  {hoursSaved ?? '—'}
-                </p>
-                <p className="text-sm text-gray-400 mt-1.5 font-medium">hours</p>
-              </>
-            )}
-          </div>
-          <div className="flex items-center gap-1.5">
-            <TrendingUp size={13} className="text-brand flex-shrink-0" />
-            <span className="text-xs text-gray-400">
-              {hoursSaved != null
-                ? `Avg. ${Math.round((hoursSaved / period) * 10) / 10} hrs / day`
-                : 'No data yet'}
-            </span>
-          </div>
-        </div>
+
+        {/* Secondary metric cards — 3 across on md+ */}
+        <MetricCard
+          label="Success Rate"
+          loading={loading}
+          value={successRate != null ? `${successRate}%` : null}
+          sub={`Last ${period} days`}
+          note={
+            successRate != null
+              ? successRate === 100
+                ? 'Perfect score — keep it up.'
+                : successRate >= 80
+                ? 'Solid reliability.'
+                : 'A few failures worth investigating.'
+              : undefined
+          }
+        />
+
+        <MetricCard
+          label="Avg. Run Time"
+          loading={loading}
+          value={formatDuration(avgDurationSec)}
+          sub="per successful run"
+          note={
+            avgDurationSec != null
+              ? avgDurationSec < 30
+                ? 'Blazing fast.'
+                : avgDurationSec < 120
+                ? 'Nice and snappy.'
+                : 'Some runs are taking a while.'
+              : undefined
+          }
+        />
+
+        <MetricCard
+          label="Active Streak"
+          loading={loading}
+          value={streak != null && streak > 0 ? streak : null}
+          sub={streak > 0 ? `day${streak === 1 ? '' : 's'} in a row` : undefined}
+          icon={Flame}
+          iconColor={streak > 0 ? '#f97316' : undefined}
+          note={
+            streak != null && streak > 0
+              ? streak >= 7
+                ? `${streak} days straight — on fire.`
+                : `Keep going to build your streak.`
+              : undefined
+          }
+        />
 
         {/* Run History — full width */}
-        <div className="col-span-3 bg-white rounded-2xl border border-gray-200 overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+        <div className="col-span-1 md:col-span-3 bg-white rounded-2xl border border-gray-200 overflow-hidden">
+          <div className="px-4 sm:px-6 py-4 border-b border-gray-100 flex items-center justify-between">
             <p className="text-sm font-semibold text-gray-800">Run History</p>
             {!loading && (
               <span className="text-xs text-gray-400">{runs.length} recent runs</span>
@@ -242,91 +333,94 @@ export default function ActivityPage() {
           </div>
 
           {error && (
-            <div className="px-6 py-4 text-sm text-red-500 bg-red-50 border-b border-red-100">
+            <div className="px-4 sm:px-6 py-4 text-sm text-red-500 bg-red-50 border-b border-red-100">
               {error} — showing available data.
             </div>
           )}
 
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-gray-100">
-                {['Platform', 'Input', 'Status', 'Time'].map((col) => (
-                  <th
-                    key={col}
-                    className="px-6 py-3 text-left text-[11px] font-semibold text-gray-400 uppercase tracking-wider"
-                  >
-                    {col}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {loading ? (
-                <>
-                  <SkeletonRow />
-                  <SkeletonRow />
-                  <SkeletonRow />
-                  <SkeletonRow />
-                </>
-              ) : runs.length === 0 ? (
-                <tr>
-                  <td colSpan={4} className="px-6 py-10 text-center text-sm text-gray-400">
-                    No runs yet. Send a message in the Playground to get started.
-                  </td>
-                </tr>
-              ) : (
-                <AnimatePresence>
-                  {runs.map((run, i) => (
-                    <motion.tr
-                      key={run.id}
-                      initial={{ opacity: 0, y: -6 }}
-                      animate={{
-                        opacity: 1,
-                        y: 0,
-                        transition: { delay: i * 0.045, duration: 0.28, ease: 'easeOut' },
-                      }}
-                      className={`border-b border-gray-50 last:border-0 hover:bg-gray-50/70 transition-colors duration-100 ${
-                        i === 0 ? 'bg-brand-light/40' : ''
-                      }`}
+          {/* Horizontally scrollable on small screens */}
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[480px]">
+              <thead>
+                <tr className="border-b border-gray-100">
+                  {['Platform', 'Input', 'Status', 'Time'].map((col) => (
+                    <th
+                      key={col}
+                      className="px-3 sm:px-6 py-3 text-left text-[11px] font-semibold text-gray-400 uppercase tracking-wider"
                     >
-                      <td className="px-6 py-3.5">
-                        <div className="flex items-center gap-2">
-                          <PlatformIcon platform={run.platform} />
-                          <span className="text-sm text-gray-600 font-medium">
-                            {platformDisplayName(run.platform)}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-6 py-3.5 text-sm text-gray-700 max-w-xs">
-                        <span className="block truncate">
-                          {run.input_text ?? run.input ?? '—'}
-                        </span>
-                      </td>
-                      <td className="px-6 py-3.5">
-                        <div className="flex items-center gap-1.5">
-                          <span
-                            className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
-                              run.status === 'success' ? 'bg-emerald-500' : 'bg-red-400'
-                            }`}
-                          />
-                          <span
-                            className={`text-xs font-medium ${
-                              run.status === 'success' ? 'text-emerald-600' : 'text-red-500'
-                            }`}
-                          >
-                            {run.status === 'success' ? 'Success' : 'Failed'}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-6 py-3.5 text-xs text-gray-400">
-                        {timeAgo(run.created_at)}
-                      </td>
-                    </motion.tr>
+                      {col}
+                    </th>
                   ))}
-                </AnimatePresence>
-              )}
-            </tbody>
-          </table>
+                </tr>
+              </thead>
+              <tbody>
+                {loading ? (
+                  <>
+                    <SkeletonRow />
+                    <SkeletonRow />
+                    <SkeletonRow />
+                    <SkeletonRow />
+                  </>
+                ) : runs.length === 0 ? (
+                  <tr>
+                    <td colSpan={4} className="px-4 sm:px-6 py-10 text-center text-sm text-gray-400">
+                      No runs yet. Send a message in the Playground to get started.
+                    </td>
+                  </tr>
+                ) : (
+                  <AnimatePresence>
+                    {runs.map((run, i) => (
+                      <motion.tr
+                        key={run.id}
+                        initial={{ opacity: 0, y: -6 }}
+                        animate={{
+                          opacity: 1,
+                          y: 0,
+                          transition: { delay: i * 0.045, duration: 0.28, ease: 'easeOut' },
+                        }}
+                        className={`border-b border-gray-50 last:border-0 hover:bg-gray-50/70 transition-colors duration-100 ${
+                          i === 0 ? 'bg-brand-light/40' : ''
+                        }`}
+                      >
+                        <td className="px-3 sm:px-6 py-3.5">
+                          <div className="flex items-center gap-2">
+                            <PlatformIcon platform={run.platform} />
+                            <span className="text-sm text-gray-600 font-medium">
+                              {platformDisplayName(run.platform)}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="px-3 sm:px-6 py-3.5 text-sm text-gray-700 max-w-[160px] sm:max-w-xs">
+                          <span className="block truncate">
+                            {run.input_text ?? run.input ?? '—'}
+                          </span>
+                        </td>
+                        <td className="px-3 sm:px-6 py-3.5">
+                          <div className="flex items-center gap-1.5">
+                            <span
+                              className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${
+                                run.status === 'success' ? 'bg-emerald-500' : 'bg-red-400'
+                              }`}
+                            />
+                            <span
+                              className={`text-xs font-medium ${
+                                run.status === 'success' ? 'text-emerald-600' : 'text-red-500'
+                              }`}
+                            >
+                              {run.status === 'success' ? 'Success' : 'Failed'}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="px-3 sm:px-6 py-3.5 text-xs text-gray-400 whitespace-nowrap">
+                          {timeAgo(run.created_at)}
+                        </td>
+                      </motion.tr>
+                    ))}
+                  </AnimatePresence>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </motion.div>

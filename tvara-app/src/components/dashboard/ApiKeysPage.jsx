@@ -30,10 +30,10 @@ export default function ApiKeysPage() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="p-8 max-w-2xl"
+      className="p-4 sm:p-8 max-w-2xl"
     >
       {/* Page header */}
-      <div className="mb-8">
+      <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold text-gray-900">API Keys</h1>
         <p className="text-sm text-gray-400 mt-0.5">
           Use this key to authenticate requests to the Tvara API.
@@ -54,7 +54,7 @@ export default function ApiKeysPage() {
 
         {/* Key field */}
         <div className="flex items-center gap-2 bg-gray-50 rounded-xl border border-gray-200 px-4 py-3">
-          <code className="flex-1 text-xs text-gray-700 font-mono tracking-wide overflow-hidden select-all">
+          <code className="flex-1 text-xs text-gray-700 font-mono tracking-wide overflow-hidden text-ellipsis whitespace-nowrap select-all">
             {displayKey}
           </code>
           <button
@@ -78,7 +78,7 @@ export default function ApiKeysPage() {
         </div>
 
         {/* Meta row */}
-        <div className="mt-5 pt-4 border-t border-gray-100 flex items-center justify-between">
+        <div className="mt-5 pt-4 border-t border-gray-100 flex flex-wrap items-center justify-between gap-3">
           <div>
             <p className="text-xs text-gray-500">
               Created on <span className="font-semibold text-gray-700">Jun 12, 2025</span>

@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { Send, Loader2, CheckCircle2, XCircle, ChevronDown, ChevronRight } from 'lucide-react'
+import { SiGmail, SiGithub, SiSlack, SiNotion, SiTelegram } from 'react-icons/si'
+import ReactMarkdown from 'react-markdown'
 import { supabase } from '../../utils/supabase'
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL
@@ -15,6 +17,28 @@ const pageVariants = {
 
 function generateId() {
   return Math.random().toString(36).slice(2, 10)
+}
+
+// Returns a subtle icon element if the step text references a known tool prefix.
+const TOOL_ICONS = [
+  { prefix: 'gmail_',    Icon: SiGmail,    color: '#EA4335' },
+  { prefix: 'github_',   Icon: SiGithub,   color: '#24292f' },
+  { prefix: 'slack_',    Icon: SiSlack,    color: '#4A154B' },
+  { prefix: 'notion_',   Icon: SiNotion,   color: '#1a1a1a' },
+  { prefix: 'telegram_', Icon: SiTelegram, color: '#2AABEE' },
+]
+
+function StepToolIcon({ step }) {
+  const lower = step.toLowerCase()
+  const match = TOOL_ICONS.find(({ prefix }) => lower.includes(prefix))
+  if (!match) return null
+  const { Icon, color } = match
+  return (
+    <Icon
+      className="flex-shrink-0 mt-0.5 opacity-60"
+      style={{ color, width: 11, height: 11 }}
+    />
+  )
 }
 
 // ─── Sub-components ──────────────────────────────────────────────────────────
@@ -57,7 +81,8 @@ function ThinkingSteps({ steps, isStreaming }) {
           {steps.map((step, i) => (
             <div key={i} className="flex items-start gap-2 pt-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-brand-mid flex-shrink-0 mt-1.5" />
-              <p className="text-xs text-gray-500 leading-relaxed">{step}</p>
+              <p className="text-xs text-gray-500 leading-relaxed flex-1">{step}</p>
+              <StepToolIcon step={step} />
             </div>
           ))}
           {isStreaming && (
@@ -91,7 +116,9 @@ function ResultCard({ summary, status }) {
         </span>
       </div>
       {summary && (
-        <p className="text-sm text-gray-700 leading-relaxed">{summary}</p>
+        <div className="prose prose-sm prose-gray max-w-none text-gray-700 [&_p]:leading-relaxed [&_ul]:ml-4 [&_ul]:list-disc [&_ol]:ml-4 [&_ol]:list-decimal [&_li]:my-0.5 [&_strong]:font-semibold">
+          <ReactMarkdown>{summary}</ReactMarkdown>
+        </div>
       )}
     </div>
   )
@@ -103,14 +130,14 @@ function AssistantMessage({ message }) {
   // Plain error fallback
   if (content && !steps.length && !summary) {
     return (
-      <div className="max-w-[80%] rounded-2xl rounded-tl-sm bg-white border border-gray-200 px-4 py-3 text-sm text-gray-700 leading-relaxed">
-        {content}
+      <div className="max-w-[90%] sm:max-w-[80%] rounded-2xl rounded-tl-sm bg-white border border-gray-200 px-4 py-3 prose prose-sm prose-gray max-w-none [&_p]:leading-relaxed [&_ul]:ml-4 [&_ul]:list-disc [&_ol]:ml-4 [&_ol]:list-decimal [&_li]:my-0.5 [&_strong]:font-semibold">
+        <ReactMarkdown>{content}</ReactMarkdown>
       </div>
     )
   }
 
   return (
-    <div className="max-w-[80%]">
+    <div className="max-w-[90%] sm:max-w-[80%]">
       {/* Thinking steps */}
       <ThinkingSteps steps={steps} isStreaming={isStreaming} />
 
@@ -132,7 +159,7 @@ function AssistantMessage({ message }) {
 
 function UserMessage({ content }) {
   return (
-    <div className="max-w-[80%] ml-auto rounded-2xl rounded-tr-sm bg-brand px-4 py-3 text-sm text-white leading-relaxed whitespace-pre-wrap">
+    <div className="max-w-[90%] sm:max-w-[80%] ml-auto rounded-2xl rounded-tr-sm bg-brand px-4 py-3 text-sm text-white leading-relaxed whitespace-pre-wrap">
       {content}
     </div>
   )
@@ -305,19 +332,19 @@ export default function PlaygroundPage() {
       initial="initial"
       animate="animate"
       exit="exit"
-      className="flex flex-col h-full p-8"
+      className="flex flex-col h-full p-4 sm:p-8"
     >
       {/* Page header */}
-      <div className="mb-6 flex-shrink-0">
+      <div className="mb-4 sm:mb-6 flex-shrink-0">
         <h1 className="text-xl font-bold text-gray-900">Playground</h1>
-        <p className="text-sm text-gray-400 mt-0.5">Describe what you want to automate. (This page is dummy for now. All responses are mocked)</p>
+        <p className="text-sm text-gray-400 mt-0.5">Describe what you want to automate</p>
       </div>
 
       {/* Chat area */}
       <div className="flex-1 bg-white rounded-2xl border border-gray-200 flex flex-col overflow-hidden min-h-0">
 
         {/* Message thread */}
-        <div className="flex-1 overflow-y-auto px-6 py-5 flex flex-col gap-4">
+        <div className="flex-1 overflow-y-auto px-3 sm:px-6 py-4 sm:py-5 flex flex-col gap-4">
           {messages.length === 0 ? (
             <EmptyState />
           ) : (
@@ -346,7 +373,7 @@ export default function PlaygroundPage() {
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={handleKeyDown}
               disabled={isStreaming}
-              placeholder="Type a message… (Enter to send, Shift+Enter for newline)"
+              placeholder="Type a message…"
               rows={2}
               className="flex-1 resize-none rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:border-brand-mid focus:bg-white transition-colors duration-150 disabled:opacity-50 disabled:cursor-not-allowed"
               style={{ maxHeight: '7.5rem' }}
