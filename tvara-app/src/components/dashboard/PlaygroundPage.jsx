@@ -288,7 +288,8 @@ export default function PlaygroundPage() {
               if (event === 'error') {
                 return {
                   ...msg,
-                  content: detail || 'An error occurred. Please try again.',
+                  summary: detail || 'An error occurred. Please try again.',
+                  status: 'error',
                   steps: [],
                   isStreaming: false,
                 }
