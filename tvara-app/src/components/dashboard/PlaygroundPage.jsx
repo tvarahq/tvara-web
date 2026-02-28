@@ -266,7 +266,7 @@ export default function PlaygroundPage() {
             continue
           }
 
-          const { event, step, summary, status } = parsed
+          const { event, step, summary, status, detail } = parsed
 
           setMessages((prev) =>
             prev.map((msg) => {
@@ -281,6 +281,15 @@ export default function PlaygroundPage() {
                   ...msg,
                   summary: summary ?? null,
                   status: status ?? 'success',
+                  isStreaming: false,
+                }
+              }
+
+              if (event === 'error') {
+                return {
+                  ...msg,
+                  content: detail || 'An error occurred. Please try again.',
+                  steps: [],
                   isStreaming: false,
                 }
               }
