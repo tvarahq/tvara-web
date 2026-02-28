@@ -35,7 +35,8 @@ export default function DashboardPage() {
         onSignOut={handleSignOut}
       />
 
-      <main className="flex-1 overflow-y-auto">
+      {/* pt-[52px] on mobile to clear the fixed top bar; md:pt-0 on desktop */}
+      <main className="flex-1 overflow-y-auto pt-[52px] md:pt-0">
         <AnimatePresence mode="wait">
           {activeTab === 'activity'    && <ActivityPage    key="activity" />}
           {activeTab === 'playground'  && <PlaygroundPage  key="playground" />}
