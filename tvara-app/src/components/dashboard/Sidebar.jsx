@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Activity, Link2, KeyRound, ExternalLink, LogOut, MessageSquare, Menu, X } from 'lucide-react'
+import { Activity, Link2, ExternalLink, LogOut, MessageSquare, Menu, X } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import tvaraLogo from '../../assets/tvara_logo.png'
 
@@ -8,7 +8,6 @@ const navItems = [
   { id: 'activity',    label: 'Activity',      icon: Activity },
   { id: 'playground',  label: 'Playground',    icon: MessageSquare },
   { id: 'integrations', label: 'Integrations', icon: Link2 },
-  // { id: 'api-keys',    label: 'API Keys',      icon: KeyRound },
 ]
 
 export default function Sidebar({ activeTab, setActiveTab, onSignOut }) {

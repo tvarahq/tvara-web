@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Unplug, RefreshCw } from 'lucide-react'
 import { SiGmail, SiGithub } from 'react-icons/si'
 import { listIntegrations, listConnections, connectIntegration, disconnectConnection } from '../../utils/api'
+import { useToast } from '../../context/ToastContext'
 
 const ALLOWED_SLUGS = ['github', 'gmail']
 
@@ -204,6 +205,7 @@ export default function ConnectionsPage() {
   const [connections,  setConnections]  = useState([])
   const [loading, setLoading] = useState(true)
   const [error,   setError]   = useState(null)
+  const { toast } = useToast()
 
   const fetchData = useCallback(async () => {
     try {
@@ -226,8 +228,13 @@ export default function ConnectionsPage() {
   }
 
   async function handleDisconnect(connected_account_id) {
-    await disconnectConnection(connected_account_id)
-    await fetchData()
+    try {
+      await disconnectConnection(connected_account_id)
+      await fetchData()
+      toast.success('Disconnected successfully')
+    } catch (e) {
+      toast.error('Failed to disconnect')
+    }
   }
 
   const connectionMap = Object.fromEntries(connections.map(c => [c.toolkit_slug, c]))

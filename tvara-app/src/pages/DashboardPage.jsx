@@ -5,10 +5,9 @@ import { useAuth } from '../context/AuthContext'
 import Sidebar from '../components/dashboard/Sidebar'
 import ActivityPage from '../components/dashboard/ActivityPage'
 import ConnectionsPage from '../components/dashboard/ConnectionsPage'
-import ApiKeysPage from '../components/dashboard/ApiKeysPage'
 import PlaygroundPage from '../components/dashboard/PlaygroundPage'
 
-const VALID_TABS = ['activity', 'playground', 'integrations', 'api-keys']
+const VALID_TABS = ['activity', 'playground', 'integrations']
 
 export default function DashboardPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -41,7 +40,6 @@ export default function DashboardPage() {
           {activeTab === 'activity'    && <ActivityPage    key="activity" />}
           {activeTab === 'playground'  && <PlaygroundPage  key="playground" />}
           {activeTab === 'integrations' && <ConnectionsPage key="integrations" />}
-          {activeTab === 'api-keys'    && <ApiKeysPage     key="api-keys" />}
         </AnimatePresence>
       </main>
     </div>

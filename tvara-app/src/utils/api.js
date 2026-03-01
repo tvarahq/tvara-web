@@ -44,3 +44,10 @@ export async function disconnectConnection(connected_account_id) {
   if (!res.ok) throw new Error('Failed to disconnect')
   return res.json()
 }
+
+export async function getRun(runId) {
+  const headers = await authHeaders()
+  const res = await fetch(`${BASE_URL}/runs/${runId}`, { headers })
+  if (!res.ok) throw new Error(`Failed to fetch run: ${res.status}`)
+  return res.json()
+}
