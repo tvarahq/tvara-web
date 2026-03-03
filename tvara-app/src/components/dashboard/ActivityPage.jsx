@@ -4,7 +4,7 @@ import { Zap, Flame, X } from 'lucide-react'
 import { SiTelegram, SiSlack, SiNotion, SiGmail, SiGithub } from 'react-icons/si'
 import PulseChart from './PulseChart'
 import { supabase } from '../../utils/supabase'
-import { getRun } from '../../utils/api'
+import { getRun, getRunStats, getChartData } from '../../utils/api'
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL
 const PAGE_SIZE = 20
@@ -46,71 +46,6 @@ const PERIOD_OPTIONS = [
   { value: 30, label: 'Last 30 days' },
 ]
 
-function computeDailyData(runs, days = 30) {
-  const slots = []
-  const now = new Date()
-  for (let i = days - 1; i >= 0; i--) {
-    const d = new Date(now)
-    d.setDate(now.getDate() - i)
-    slots.push({
-      date: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
-      key: d.toISOString().slice(0, 10),
-      success: 0,
-      failed: 0,
-    })
-  }
-  const map = {}
-  slots.forEach((d) => { map[d.key] = d })
-  runs.forEach((run) => {
-    if (!run.created_at) return
-    const key = new Date(run.created_at).toISOString().slice(0, 10)
-    if (!map[key]) return
-    if (run.status === 'success') map[key].success += 1
-    else map[key].failed += 1
-  })
-  return slots.map(({ date, success, failed }) => ({ date, success, failed }))
-}
-
-function computeStats(runs, days = 30) {
-  const cutoff = Date.now() - days * 24 * 60 * 60 * 1000
-  const periodRuns = runs.filter((r) => new Date(r.created_at).getTime() > cutoff)
-  const successful = periodRuns.filter((r) => r.status === 'success')
-
-  const total = successful.length
-  if (total === 0) return { total: null, successRate: null, avgDurationSec: null, streak: null }
-
-  const successRate = periodRuns.length > 0
-    ? Math.round((successful.length / periodRuns.length) * 100)
-    : null
-
-  // Avg duration from runs that have both timestamps
-  const durations = successful
-    .filter((r) => r.completed_at && r.created_at)
-    .map((r) => (new Date(r.completed_at).getTime() - new Date(r.created_at).getTime()) / 1000)
-  const avgDurationSec = durations.length > 0
-    ? Math.round(durations.reduce((a, b) => a + b, 0) / durations.length)
-    : null
-
-  // Streak: consecutive days (going backwards from today) with ≥1 success
-  const successDays = new Set(
-    successful.map((r) => new Date(r.created_at).toISOString().slice(0, 10))
-  )
-  let streak = 0
-  const today = new Date()
-  for (let i = 0; i < 365; i++) {
-    const d = new Date(today)
-    d.setDate(today.getDate() - i)
-    const key = d.toISOString().slice(0, 10)
-    if (successDays.has(key)) {
-      streak++
-    } else if (i > 0) {
-      // Allow today to be empty without breaking the streak
-      break
-    }
-  }
-
-  return { total, successRate, avgDurationSec, streak }
-}
 
 function formatDuration(sec) {
   if (sec == null) return '—'
@@ -465,6 +400,24 @@ export default function ActivityPage() {
   const [page, setPage] = useState(0)
   const [statusFilter, setStatusFilter] = useState('all')
   const [hasMore, setHasMore] = useState(false)
+  const [stats, setStats] = useState(null)
+  const [statsLoading, setStatsLoading] = useState(true)
+  const [dailyData, setDailyData] = useState([])
+
+  const fetchStats = useCallback(async () => {
+    setStatsLoading(true)
+    try {
+      const [s, chart] = await Promise.all([getRunStats(period), getChartData(period)])
+      setStats(s)
+      setDailyData(chart)
+    } catch {
+      // silently keep previous stats on error
+    } finally {
+      setStatsLoading(false)
+    }
+  }, [period])
+
+  useEffect(() => { fetchStats() }, [fetchStats])
 
   const fetchRuns = useCallback(async () => {
     try {
@@ -506,8 +459,12 @@ export default function ActivityPage() {
         statusFilter === 'success' ? r.status === 'success' : r.status !== 'success'
       )
 
-  const { total, successRate, avgDurationSec, streak } = computeStats(runs, period)
-  const dailyData = computeDailyData(runs, period)
+  const total = stats?.total_success ?? null
+  const successRate = stats != null && stats.total_runs > 0
+    ? Math.round((stats.total_success / stats.total_runs) * 100)
+    : null
+  const avgDurationSec = stats?.avg_duration_sec ?? null
+  const streak = stats?.streak ?? null
 
   const showPagination = page > 0 || hasMore
 
@@ -534,7 +491,7 @@ export default function ActivityPage() {
             <div>
               <p className="text-sm font-semibold text-gray-800">Successful Automations</p>
               <div className="flex items-baseline gap-2 mt-2">
-                {loading ? (
+                {statsLoading ? (
                   <StatsSkeleton />
                 ) : (
                   <span className="text-3xl font-bold text-gray-900 leading-none">
@@ -562,7 +519,7 @@ export default function ActivityPage() {
         {/* Secondary metric cards — 3 across on md+ */}
         <MetricCard
           label="Success Rate"
-          loading={loading}
+          loading={statsLoading}
           value={successRate != null ? `${successRate}%` : null}
           sub={`Last ${period} days`}
           note={
@@ -578,7 +535,7 @@ export default function ActivityPage() {
 
         <MetricCard
           label="Avg. Run Time"
-          loading={loading}
+          loading={statsLoading}
           value={formatDuration(avgDurationSec)}
           sub="per successful run"
           note={
@@ -594,7 +551,7 @@ export default function ActivityPage() {
 
         <MetricCard
           label="Active Streak"
-          loading={loading}
+          loading={statsLoading}
           value={streak != null && streak > 0 ? streak : null}
           sub={streak > 0 ? `day${streak === 1 ? '' : 's'} in a row` : undefined}
           icon={Flame}

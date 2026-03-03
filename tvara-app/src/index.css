@@ -17,7 +17,16 @@
   box-sizing: border-box;
 }
 
+html {
+  background-color: #f9fafb; /* matches bg-gray-50 — the landing page root */
+}
+
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
+  background-color: #f9fafb;
+}
+
+.root {
+  background-color: white;
 }

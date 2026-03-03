@@ -124,8 +124,17 @@ function ResultCard({ summary, status }) {
   )
 }
 
+function StreamingText({ text }) {
+  return (
+    <div className="mt-2 text-sm text-gray-700 leading-relaxed whitespace-pre-wrap">
+      {text}
+      <span className="inline-block w-0.5 h-[0.9em] bg-brand ml-0.5 animate-pulse align-middle" />
+    </div>
+  )
+}
+
 function AssistantMessage({ message }) {
-  const { steps = [], summary, status, isStreaming, content } = message
+  const { steps = [], summary, status, isStreaming, content, streamingText } = message
 
   // Plain error fallback
   if (content && !steps.length && !summary) {
@@ -141,17 +150,22 @@ function AssistantMessage({ message }) {
       {/* Thinking steps */}
       <ThinkingSteps steps={steps} isStreaming={isStreaming} />
 
-      {/* Result card — appears when streaming finishes */}
-      {summary && !isStreaming && (
-        <ResultCard summary={summary} status={status} />
+      {/* Streaming token text — shown while tokens arrive, hidden once result lands */}
+      {isStreaming && streamingText && (
+        <StreamingText text={streamingText} />
       )}
 
-      {/* Inline streaming indicator when there are no steps yet */}
-      {isStreaming && steps.length === 0 && (
+      {/* Inline loader — only when no steps and no tokens have arrived yet */}
+      {isStreaming && steps.length === 0 && !streamingText && (
         <div className="flex items-center gap-2 px-4 py-3 bg-white border border-gray-200 rounded-2xl rounded-tl-sm">
           <Loader2 size={13} className="text-brand animate-spin" />
           <span className="text-xs text-gray-400">Working on it…</span>
         </div>
+      )}
+
+      {/* Result card — appears when streaming finishes */}
+      {summary && !isStreaming && (
+        <ResultCard summary={summary} status={status} />
       )}
     </div>
   )
@@ -214,7 +228,7 @@ export default function PlaygroundPage() {
     // Push placeholder assistant message
     setMessages((prev) => [
       ...prev,
-      { id: assistantMsgId, role: 'assistant', content: '', steps: [], summary: null, status: null, isStreaming: true },
+      { id: assistantMsgId, role: 'assistant', content: '', steps: [], summary: null, status: null, isStreaming: true, streamingText: '' },
     ])
 
     try {
@@ -266,7 +280,7 @@ export default function PlaygroundPage() {
             continue
           }
 
-          const { event, step, summary, status, detail } = parsed
+          const { event, step, summary, status, detail, text } = parsed
 
           setMessages((prev) =>
             prev.map((msg) => {
@@ -276,11 +290,16 @@ export default function PlaygroundPage() {
                 return { ...msg, steps: [...(msg.steps ?? []), step] }
               }
 
+              if (event === 'token' && text) {
+                return { ...msg, streamingText: (msg.streamingText || '') + text }
+              }
+
               if (event === 'result') {
                 return {
                   ...msg,
                   summary: summary ?? null,
                   status: status ?? 'success',
+                  streamingText: '',
                   isStreaming: false,
                 }
               }

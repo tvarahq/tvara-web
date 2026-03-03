@@ -51,3 +51,17 @@ export async function getRun(runId) {
   if (!res.ok) throw new Error(`Failed to fetch run: ${res.status}`)
   return res.json()
 }
+
+export async function getRunStats(days = 30) {
+  const headers = await authHeaders()
+  const res = await fetch(`${BASE_URL}/runs/stats?days=${days}`, { headers })
+  if (!res.ok) throw new Error(`Failed to fetch run stats: ${res.status}`)
+  return res.json()
+}
+
+export async function getChartData(days = 30) {
+  const headers = await authHeaders()
+  const res = await fetch(`${BASE_URL}/runs/chart?days=${days}`, { headers })
+  if (!res.ok) throw new Error(`Failed to fetch chart data: ${res.status}`)
+  return res.json()
+}

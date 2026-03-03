@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight, Unplug, RefreshCw } from 'lucide-react'
-import { SiGmail, SiGithub } from 'react-icons/si'
+import { SiGmail, SiGithub, SiSlack, SiNotion, SiX } from 'react-icons/si'
 import { listIntegrations, listConnections, connectIntegration, disconnectConnection } from '../../utils/api'
 import { useToast } from '../../context/ToastContext'
 
-const ALLOWED_SLUGS = ['github', 'gmail']
+const ALLOWED_SLUGS = ['github', 'gmail', 'slack', 'notion', 'twitter']
 
 const INTEGRATION_META = {
   github: {
@@ -21,6 +21,27 @@ const INTEGRATION_META = {
     bg: '#EA433512',
     description: 'Read, compose, and send emails.',
     capabilities: ['Read Emails', 'Send Emails', 'Labels', 'Drafts'],
+  },
+  slack: {
+    icon: SiSlack,
+    color: '#4A154B',
+    bg: '#4A154B12',
+    description: 'Send messages and manage channels.',
+    capabilities: ['Messages', 'Channels', 'Notifications', 'Bots'],
+  },
+  notion: {
+    icon: SiNotion,
+    color: '#000000',
+    bg: '#00000010',
+    description: 'Read and write pages and databases.',
+    capabilities: ['Pages', 'Databases', 'Blocks', 'Search'],
+  },
+  twitter: {
+    icon: SiX,
+    color: '#000000',
+    bg: '#00000010',
+    description: 'Post tweets and read your timeline.',
+    capabilities: ['Tweets', 'Timeline', 'Mentions', 'DMs'],
   },
 }
 

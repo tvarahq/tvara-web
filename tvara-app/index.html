@@ -4,56 +4,79 @@
     <!-- Basic Meta -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tvara</title>
+    <title>Tvara — AI Multi-Agent Orchestration Platform | TvaraHQ</title>
 
     <!-- SEO -->
     <meta
       name="description"
-      content="Describe your workflow in natural language. Tvara builds it for you using AI. Automate smarter, faster, and without code."
+      content="Tvara is an AI multi-agent orchestration platform. Automate workflows across GitHub, Gmail, Notion and more with LLM-powered agents. Free during beta."
     />
     <meta
       name="keywords"
-      content="AI workflows, automation, AI agent, workflow builder, no-code AI, business automation"
+      content="tvara, tvarahq, AI agents, multi-agent orchestration, AI automation, LLM workflow, AI multi-agent platform, workflow automation"
     />
-    <meta name="author" content="Tvara" />
+    <meta name="author" content="TvaraHQ" />
     <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#3399B4" />
     <link rel="canonical" href="https://tvarahq.com/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Tvara" />
+    <meta property="og:site_name" content="TvaraHQ" />
     <meta property="og:locale" content="en_US" />
-    <meta property="og:title" content="Tvara - Build Workflows with AI" />
+    <meta property="og:title" content="Tvara — AI Multi-Agent Orchestration Platform | TvaraHQ" />
     <meta
       property="og:description"
-      content="Describe your workflow in natural language. Tvara builds it for you."
+      content="Tvara is an AI multi-agent orchestration platform. Automate workflows across GitHub, Gmail, Notion and more with LLM-powered agents. Free during beta."
     />
-    <meta property="og:image" content="https://tvarahq.com/preview.png" />
+    <meta property="og:image" content="https://tvarahq.com/og-image.png" />
     <meta property="og:url" content="https://tvarahq.com/" />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Tvara - Build Workflows with AI" />
+    <meta name="twitter:site" content="@tvarahq" />
+    <meta name="twitter:title" content="Tvara — AI Multi-Agent Orchestration Platform | TvaraHQ" />
     <meta
       name="twitter:description"
-      content="Describe your workflow in natural language. Tvara builds it for you."
+      content="Tvara is an AI multi-agent orchestration platform. Automate workflows across GitHub, Gmail, Notion and more with LLM-powered agents. Free during beta."
     />
-    <meta name="twitter:image" content="https://tvarahq.com/preview.png" />
+    <meta name="twitter:image" content="https://tvarahq.com/og-image.png" />
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
-    <!-- Fonts -->
+    <!-- Preconnect — fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Preconnect — Supabase auth (project-agnostic *.supabase.co) -->
+    <link rel="dns-prefetch" href="https://supabase.co" />
+
+    <!-- Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Structured Data for Google -->
+    <!-- Structured Data — Organization -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "TvaraHQ",
+        "url": "https://tvarahq.com",
+        "logo": "https://tvarahq.com/logo.png",
+        "description": "Tvara is an AI multi-agent orchestration platform that lets you automate workflows across GitHub, Gmail, Notion, and more using LLM-powered agents.",
+        "sameAs": [
+          "https://github.com/tvarahq",
+          "https://twitter.com/tvarahq",
+          "https://linkedin.com/company/tvarahq"
+        ]
+      }
+    </script>
+
+    <!-- Structured Data — SoftwareApplication -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -61,8 +84,19 @@
         "name": "Tvara",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web",
-        "description": "Describe your workflow in natural language. Tvara builds it for you.",
-        "url": "https://tvarahq.com/"
+        "description": "AI multi-agent orchestration platform. Automate workflows across GitHub, Gmail, Notion and more with LLM-powered agents.",
+        "url": "https://tvarahq.com/",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "description": "Free during beta"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "TvaraHQ",
+          "url": "https://tvarahq.com"
+        }
       }
     </script>
   </head>

@@ -3,23 +3,15 @@
 
   <url>
     <loc>https://tvarahq.com/</loc>
-    <lastmod>2025-09-09</lastmod>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://blog.tvarahq.com/</loc>
-    <lastmod>2025-09-09</lastmod>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://github.com/tvarahq</loc>
-    <priority>0.5</priority>
-  </url>
-
-  <url>
-    <loc>https://linkedin.com/company/tvarahq</loc>
+    <loc>https://tvarahq.com/login</loc>
+    <lastmod>2026-03-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
 
