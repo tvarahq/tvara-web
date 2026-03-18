@@ -65,3 +65,24 @@ export async function getChartData(days = 30) {
   if (!res.ok) throw new Error(`Failed to fetch chart data: ${res.status}`)
   return res.json()
 }
+
+export async function getTelegramStatus() {
+  const headers = await authHeaders()
+  const res = await fetch(`${BASE_URL}/telegram/status`, { headers })
+  if (!res.ok) throw new Error('Failed to fetch Telegram status')
+  return res.json()
+}
+
+export async function linkTelegram() {
+  const headers = await authHeaders()
+  const res = await fetch(`${BASE_URL}/telegram/link`, { method: 'POST', headers })
+  if (!res.ok) throw new Error('Failed to generate Telegram link')
+  return res.json()
+}
+
+export async function unlinkTelegram() {
+  const headers = await authHeaders()
+  const res = await fetch(`${BASE_URL}/telegram/unlink`, { method: 'DELETE', headers })
+  if (!res.ok) throw new Error('Failed to unlink Telegram')
+  return res.json()
+}
