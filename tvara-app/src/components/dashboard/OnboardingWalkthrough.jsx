@@ -21,8 +21,8 @@ const STEPS = [
   },
   {
     title: 'Link Telegram',
-    body: 'Chat with your agent on the go — no app switching needed. Find the Telegram link in Integrations.',
-    cta: 'Finish',
+    body: 'Chat with your agent on the go — no app switching needed. Connect Telegram from the Channels tab.',
+    cta: 'Go to Channels →',
   },
 ]
 
@@ -43,6 +43,7 @@ export default function OnboardingWalkthrough({ setActiveTab, isGuest }) {
   function handleCta() {
     if (step === 1) setActiveTab('integrations')
     if (step === 2) setActiveTab('playground')
+    if (step === 3) setActiveTab('channels')
 
     if (step < STEPS.length - 1) {
       setStep((s) => s + 1)
