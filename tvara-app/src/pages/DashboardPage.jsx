@@ -6,12 +6,13 @@ import Sidebar from '../components/dashboard/Sidebar'
 import ActivityPage from '../components/dashboard/ActivityPage'
 import ConnectionsPage from '../components/dashboard/ConnectionsPage'
 import PlaygroundPage from '../components/dashboard/PlaygroundPage'
+import OnboardingWalkthrough from '../components/dashboard/OnboardingWalkthrough'
 
 const VALID_TABS = ['activity', 'playground', 'integrations']
 
 export default function DashboardPage() {
   const [searchParams, setSearchParams] = useSearchParams()
-  const { signOut } = useAuth()
+  const { signOut, isGuest } = useAuth()
   const navigate = useNavigate()
 
   const tabParam = searchParams.get('tab')
@@ -28,6 +29,7 @@ export default function DashboardPage() {
 
   return (
     <div className="flex h-screen bg-white overflow-hidden">
+      <OnboardingWalkthrough setActiveTab={setActiveTab} isGuest={isGuest} />
       <Sidebar
         activeTab={activeTab}
         setActiveTab={setActiveTab}

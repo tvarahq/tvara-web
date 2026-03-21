@@ -183,6 +183,7 @@ function IntegrationCard({ integration, connection, onConnect, onDisconnect, ind
 function TelegramCard({ status, onRefresh }) {
   const [actioning, setActioning]     = useState(false)
   const [pendingLink, setPendingLink] = useState(false)
+  const [telegramUrl, setTelegramUrl] = useState(null)
   const { toast } = useToast()
 
   const isLinked = status?.linked ?? false
@@ -191,8 +192,11 @@ function TelegramCard({ status, onRefresh }) {
     setActioning(true)
     try {
       const { bot_username, token } = await linkTelegram()
-      window.open(`https://t.me/${bot_username}?start=${token}`, '_blank', 'noopener,noreferrer')
+      const url = `https://t.me/${bot_username}?start=${token}`
+      setTelegramUrl(url)
       setPendingLink(true)
+      // Best-effort auto-open (works on desktop; iOS Safari blocks this after async)
+      window.open(url, '_blank', 'noopener,noreferrer')
     } catch {
       toast.error('Failed to generate Telegram link')
     } finally {
@@ -309,6 +313,17 @@ function TelegramCard({ status, onRefresh }) {
                     Send <span className="font-mono font-bold text-gray-700 mx-1">/start</span> to the bot
                   </li>
                 </ol>
+                {telegramUrl && (
+                  <a
+                    href={telegramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-brand-dark hover:text-brand transition-colors"
+                  >
+                    <ExternalLink size={11} />
+                    Tap here to open Telegram
+                  </a>
+                )}
                 <button
                   onClick={handleCheckStatus}
                   disabled={actioning}

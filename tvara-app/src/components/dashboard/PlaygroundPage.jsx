@@ -179,16 +179,34 @@ function UserMessage({ content }) {
   )
 }
 
-function EmptyState() {
+const EXAMPLE_PROMPTS = [
+  "Summarise my unread emails from today",
+  "Tweet about our latest product update",
+  "Find open GitHub issues assigned to me",
+  "Send a Slack message to #general",
+]
+
+function EmptyState({ onSelect }) {
   return (
     <div className="flex-1 flex items-center justify-center">
       <div className="text-center max-w-sm px-4">
         <div className="w-12 h-12 rounded-2xl bg-brand-light flex items-center justify-center mx-auto mb-4">
           <span className="text-2xl">✦</span>
         </div>
-        <p className="text-sm text-gray-400 leading-relaxed">
+        <p className="text-sm text-gray-400 leading-relaxed mb-4">
           Ask me to automate anything — schedule a meeting, send a report, summarize emails…
         </p>
+        <div className="flex flex-wrap justify-center gap-2 max-w-sm px-4">
+          {EXAMPLE_PROMPTS.map((prompt) => (
+            <button
+              key={prompt}
+              onClick={() => onSelect(prompt)}
+              className="text-xs font-medium px-3.5 py-2 rounded-xl border border-gray-200 bg-white text-gray-500 hover:border-brand-mid hover:text-brand-dark hover:bg-brand-light transition-all duration-150 cursor-pointer text-left"
+            >
+              {prompt}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -375,7 +393,10 @@ export default function PlaygroundPage() {
         {/* Message thread */}
         <div className="flex-1 overflow-y-auto px-3 sm:px-6 py-4 sm:py-5 flex flex-col gap-4">
           {messages.length === 0 ? (
-            <EmptyState />
+            <EmptyState onSelect={(prompt) => {
+              setInputValue(prompt)
+              textareaRef.current?.focus()
+            }} />
           ) : (
             messages.map((msg) => (
               <div
