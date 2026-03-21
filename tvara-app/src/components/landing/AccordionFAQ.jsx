@@ -4,28 +4,32 @@ import { Plus, Minus } from 'lucide-react'
 
 const FAQS = [
   {
-    q: 'Is Tvara really free during beta?',
-    a: 'Yes, fully free while we are in beta. We will introduce paid plans as we scale, but early users will always get a generous free tier. No credit card required to sign up.',
+    q: 'Is Tvara free to use?',
+    a: 'Yes, fully free during beta. No credit card required — just sign up and start automating. We will introduce paid plans as we scale, but early users will always get a generous free tier.',
   },
   {
     q: 'Which integrations does Tvara support?',
-    a: 'Right now Tvara supports GitHub, Gmail, Slack, Notion, Twitter, and more. We are adding new integrations every week. If yours is missing, just ask.',
+    a: 'Tvara currently supports GitHub, Gmail, Slack, Notion, and Twitter. Connect them from the Integrations tab in your dashboard and your agent will have access to all of them in every task.',
   },
   {
-    q: 'How does the multi-agent system work?',
-    a: 'When you send a message, Tvara\'s planner agent decides which specialized sub-agents to invoke (a writer, a code executor, a data retriever, etc.). They work in parallel or in sequence depending on the task, then consolidate results into a single response. You never have to orchestrate this manually.',
+    q: 'How does the agent work?',
+    a: 'You describe a task in plain language and Tvara runs it using the tools connected to your account. For complex tasks, a supervisor agent can delegate to specialists — one for code, one for email, one for search — and combine their outputs into a single result.',
+  },
+  {
+    q: 'Can I use Tvara on Telegram?',
+    a: 'Yes. Head to the Channels tab in your dashboard, link your Telegram account, and you can chat with your Tvara agent directly from Telegram — trigger tasks, get results, and stay in the loop without opening a browser.',
+  },
+  {
+    q: 'Do I need an account to try it?',
+    a: 'No. You can sign in as a guest and use the Playground right away without creating an account. Guest sessions are anonymous. To connect integrations or use Telegram, you will need to sign up for a free account.',
   },
   {
     q: 'Is my data secure?',
-    a: 'All credentials are stored encrypted at rest. Tvara never stores the content of your messages beyond what is needed for the current session. OAuth tokens are scoped to the minimum permissions required, and you can revoke access at any time from the dashboard.',
-  },
-  {
-    q: 'How do I use Tvara?',
-    a: 'Head straight to the Playground from your dashboard, type a task, hit send, and Tvara gets to work. Telegram support is coming soon so you can trigger automations right from your chat without ever opening a browser.',
+    a: 'OAuth credentials are stored encrypted at rest and scoped to the minimum permissions required. You can revoke any integration at any time from the Integrations tab. We do not sell or share your data.',
   },
   {
     q: 'What is the open-source Tvara framework?',
-    a: 'The Tvara framework is the Python multi-agent orchestration engine powering everything under the hood. It is MIT-licensed and available on GitHub. You can self-host it, audit the routing logic, or build your own integrations on top of it.',
+    a: 'The Tvara framework is the Python multi-agent orchestration SDK powering everything under the hood. It is MIT-licensed and available on GitHub. You can build your own agents/tools, and/or embed it directly into your own product.',
   },
 ]
 

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Activity, Link2, ExternalLink, LogOut, MessageSquare, Menu, X, Radio } from 'lucide-react'
+import { Activity, Link2, ExternalLink, LogOut, MessageSquare, Menu, X, Radio, Settings, UserPlus } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import tvaraLogo from '../../assets/tvara_logo.png'
 
@@ -12,7 +13,8 @@ const navItems = [
 ]
 
 export default function Sidebar({ activeTab, setActiveTab, onSignOut }) {
-  const { user } = useAuth()
+  const { user, signOut } = useAuth()
+  const navigate = useNavigate()
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const displayName = user?.is_anonymous
@@ -95,6 +97,25 @@ export default function Sidebar({ activeTab, setActiveTab, onSignOut }) {
           </div>
           <ExternalLink size={11} className="text-gray-300 group-hover:text-brand transition-colors flex-shrink-0" />
         </a>
+
+        {/* Upgrade or Settings */}
+        {user?.is_anonymous ? (
+          <button
+            onClick={async () => { await signOut(); navigate('/login', { replace: true }) }}
+            className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl bg-brand-light text-brand-dark border border-brand-mid hover:opacity-90 text-xs font-semibold transition-colors cursor-pointer w-full"
+          >
+            <UserPlus size={14} />
+            Upgrade account
+          </button>
+        ) : (
+          <button
+            onClick={() => handleNavClick('settings')}
+            className="w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-gray-400 hover:bg-gray-200/70 hover:text-gray-700 text-xs font-medium transition-all duration-150 cursor-pointer"
+          >
+            <Settings size={14} />
+            Settings
+          </button>
+        )}
 
         {/* Sign out */}
         <button

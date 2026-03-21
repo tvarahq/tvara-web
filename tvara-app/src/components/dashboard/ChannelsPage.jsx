@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { RefreshCw, Unplug, ExternalLink, CheckCircle2, MessageCircle, Zap, Bot } from 'lucide-react'
+import { RefreshCw, Unplug, ExternalLink, CheckCircle2, MessageCircle, Zap, Bot, Lock } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { FaTelegram } from 'react-icons/fa'
 import { getTelegramStatus, linkTelegram, unlinkTelegram } from '../../utils/api'
 import { useToast } from '../../context/ToastContext'
+import { useAuth } from '../../context/AuthContext'
 
 const TELEGRAM_COLOR = '#229ED9'
 
@@ -263,9 +265,53 @@ function Skeleton() {
   )
 }
 
+// ─── GuestGate ─────────────────────────────────────────────────────────────────
+
+function GuestGate() {
+  return (
+    <motion.div
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="p-4 sm:p-8"
+    >
+      <div className="mb-7">
+        <h1 className="text-xl font-bold text-gray-900">Channels</h1>
+        <p className="text-sm text-gray-400 mt-0.5">Connect messaging channels to interact with your agent on the go.</p>
+      </div>
+
+      <div className="rounded-2xl border border-gray-200 bg-white max-w-sm px-6 py-8 flex flex-col items-center text-center">
+        <div className="w-11 h-11 rounded-xl bg-gray-100 flex items-center justify-center mb-4">
+          <Lock size={20} className="text-gray-400" />
+        </div>
+        <h2 className="text-sm font-bold text-gray-900 mb-1.5">Sign in to connect Telegram</h2>
+        <p className="text-xs text-gray-400 leading-relaxed mb-6">
+          Telegram channels are only available for registered accounts.
+        </p>
+        <div className="flex items-center gap-2 w-full">
+          <Link
+            to="/login"
+            className="flex-1 flex items-center justify-center text-xs font-semibold py-2.5 rounded-xl bg-gray-900 text-white hover:bg-gray-700 transition-colors"
+          >
+            Sign up free
+          </Link>
+          <Link
+            to="/login"
+            className="flex-1 flex items-center justify-center text-xs font-semibold py-2.5 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            Sign in
+          </Link>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 // ─── ChannelsPage ──────────────────────────────────────────────────────────────
 
 export default function ChannelsPage() {
+  const { isGuest } = useAuth()
   const [telegramStatus, setTelegramStatus] = useState(null)
   const [loading, setLoading] = useState(true)
 
@@ -280,7 +326,11 @@ export default function ChannelsPage() {
     }
   }, [])
 
-  useEffect(() => { fetchStatus() }, [fetchStatus])
+  useEffect(() => {
+    if (!isGuest) fetchStatus()
+  }, [fetchStatus, isGuest])
+
+  if (isGuest) return <GuestGate />
 
   if (loading) return <Skeleton />
 

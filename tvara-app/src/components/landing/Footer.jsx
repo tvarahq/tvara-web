@@ -3,11 +3,6 @@ import { FaXTwitter } from 'react-icons/fa6'
 import { FaGithub } from 'react-icons/fa'
 import tvaraIcon from '../../assets/tvara_logo.png'
 
-const NAV_LINKS = [
-  { label: 'Sign in', to: '/login', internal: true },
-  { label: 'Get started', to: '/login', internal: true },
-  { label: 'GitHub', href: 'https://github.com/tvarahq/tvara', internal: false },
-]
 
 export default function Footer() {
   return (
@@ -24,27 +19,6 @@ export default function Footer() {
 
         {/* Right — links */}
         <div className="flex items-center gap-4">
-          {NAV_LINKS.map((link) =>
-            link.internal ? (
-              <Link
-                key={link.label}
-                to={link.to}
-                className="text-sm font-semibold text-gray-400 hover:text-white transition-colors duration-150"
-              >
-                {link.label}
-              </Link>
-            ) : (
-              <a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm font-semibold text-gray-400 hover:text-white transition-colors duration-150"
-              >
-                {link.label}
-              </a>
-            )
-          )}
           <a
             href="https://x.com/tvarahq"
             target="_blank"
@@ -61,6 +35,7 @@ export default function Footer() {
             className="flex items-center gap-1.5 text-sm font-semibold text-gray-400 hover:text-white transition-colors duration-150"
           >
             <FaGithub size={14} />
+            tvara
           </a>
         </div>
       </div>

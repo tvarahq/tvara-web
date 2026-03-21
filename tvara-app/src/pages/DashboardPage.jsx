@@ -8,8 +8,9 @@ import ConnectionsPage from '../components/dashboard/ConnectionsPage'
 import PlaygroundPage from '../components/dashboard/PlaygroundPage'
 import OnboardingWalkthrough from '../components/dashboard/OnboardingWalkthrough'
 import ChannelsPage from '../components/dashboard/ChannelsPage'
+import SettingsPage from '../components/dashboard/SettingsPage'
 
-const VALID_TABS = ['activity', 'playground', 'integrations', 'channels']
+const VALID_TABS = ['activity', 'playground', 'integrations', 'channels', 'settings']
 
 export default function DashboardPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -44,6 +45,7 @@ export default function DashboardPage() {
           {activeTab === 'playground'   && <PlaygroundPage  key="playground" />}
           {activeTab === 'integrations' && <ConnectionsPage key="integrations" />}
           {activeTab === 'channels'     && <ChannelsPage    key="channels" />}
+          {activeTab === 'settings'     && <SettingsPage    key="settings" />}
         </AnimatePresence>
       </main>
     </div>

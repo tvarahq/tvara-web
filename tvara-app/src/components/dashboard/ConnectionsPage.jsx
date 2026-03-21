@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowRight, Unplug, RefreshCw } from 'lucide-react'
+import { ArrowRight, Unplug, RefreshCw, Lock } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { SiGmail, SiGithub, SiSlack, SiNotion, SiX } from 'react-icons/si'
 import {
   listIntegrations,
@@ -9,6 +10,7 @@ import {
   disconnectConnection,
 } from '../../utils/api'
 import { useToast } from '../../context/ToastContext'
+import { useAuth } from '../../context/AuthContext'
 
 const ALLOWED_SLUGS = ['github', 'gmail', 'slack', 'notion', 'twitter']
 
@@ -207,9 +209,57 @@ function Skeleton() {
   )
 }
 
+// ─── GuestGate ─────────────────────────────────────────────────────────────────
+
+function GuestGate() {
+  return (
+    <motion.div
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="p-4 sm:p-8"
+    >
+      {/* Header */}
+      <div className="flex items-start justify-between mb-7">
+        <div>
+          <h1 className="text-xl font-bold text-gray-900">Integrations</h1>
+          <p className="text-sm text-gray-400 mt-0.5">Connect apps and channels to power your agent.</p>
+        </div>
+      </div>
+
+      {/* Locked state banner */}
+      <div className="rounded-2xl border border-gray-200 bg-white px-6 py-8 flex flex-col items-center text-center max-w-md">
+        <div className="w-11 h-11 rounded-xl bg-gray-100 flex items-center justify-center mb-4">
+          <Lock size={20} className="text-gray-400" />
+        </div>
+        <h2 className="text-sm font-bold text-gray-900 mb-1.5">Integrations require a full account</h2>
+        <p className="text-xs text-gray-400 leading-relaxed mb-6">
+          OAuth tokens are tied to your account. Sign up to keep your connections.
+        </p>
+        <div className="flex items-center gap-2 w-full">
+          <Link
+            to="/login"
+            className="flex-1 flex items-center justify-center text-xs font-semibold py-2.5 rounded-xl bg-gray-900 text-white hover:bg-gray-700 transition-colors"
+          >
+            Sign up free
+          </Link>
+          <Link
+            to="/login"
+            className="flex-1 flex items-center justify-center text-xs font-semibold py-2.5 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 transition-colors"
+          >
+            Sign in
+          </Link>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
 // ─── ConnectionsPage ──────────────────────────────────────────────────────────
 
 export default function ConnectionsPage() {
+  const { isGuest } = useAuth()
   const [integrations, setIntegrations] = useState([])
   const [connections,  setConnections]  = useState([])
   const [loading, setLoading] = useState(true)
@@ -243,7 +293,11 @@ export default function ConnectionsPage() {
     }
   }, [])
 
-  useEffect(() => { fetchData() }, [fetchData])
+  useEffect(() => {
+    if (!isGuest) fetchData()
+  }, [fetchData, isGuest])
+
+  if (isGuest) return <GuestGate />
 
   async function handleConnect(slug) {
     const { redirect_url } = await connectIntegration(slug)
